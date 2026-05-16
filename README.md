@@ -167,7 +167,7 @@ npm run dev
 
 ## 🔧 Detailed Setup Guide
 
-### 📍 Google Cloud Setup (#google-setup)
+### Google Cloud Setup
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
 2. Create a new project named **Wingman**.
 3. Go to **APIs & Services > Library** and enable:
@@ -185,14 +185,14 @@ npm run dev
    - Authorized redirect URIs: `http://localhost:8000/api/v1/auth/callback/google`.
 6. Copy the **Client ID** and **Client Secret** into the Wingman Setup Assistant.
 
-### 💬 Slack Integration (#slack-setup)
+### Slack Integration
 1. Go to [Slack App Dashboard](https://api.slack.com/apps).
 2. Click **Create New App > From an app manifest**.
 3. Select your workspace and paste the YAML provided in the Wingman Setup Assistant.
 4. Go to **Install App** and click **Install to Workspace**.
 5. Copy the **Bot User OAuth Token** (starts with `xoxb-`) into Wingman.
 
-### 🌲 Pinecone Memory (#pinecone-setup)
+### Pinecone Memory
 1. Sign up at [Pinecone.io](https://www.pinecone.io/).
 2. Click **Create Index**:
    - Name: `wingman-index` (or your choice).
@@ -201,13 +201,13 @@ npm run dev
 3. Go to **API Keys** and create a new key.
 4. Copy the **API Key**, **Index Name**, and **Environment** into Wingman.
 
-### 🕸️ Neo4j Aura (#neo4j-setup)
+### Neo4j Aura
 1. Sign up at [Neo4j Aura](https://neo4j.com/cloud/aura/).
 2. Create a new **AuraDB Free** instance.
 3. Download the `credentials.json` file provided during creation.
 4. Copy the **Connection URI**, **Username**, and **Password** into Wingman.
 
-### 🧠 LLM Engine Setup (#llm-engine-setup)
+### LLM Engine Setup
 1. Go to [OpenAI API Keys](https://platform.openai.com/api-keys).
 2. Create a new secret key.
 3. **Disclaimer:** Currently, Wingman is optimized for **OpenAI only**. Ensure your key has credits and access to `gpt-4o` or `gpt-4-turbo`.
