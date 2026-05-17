@@ -20,42 +20,56 @@ const KNOWN_EXPRESSIONS = ALL_EMOTIONS;
 function parseMessageExpression(rawContent: string): { expression: string; cleanContent: string } {
   if (!rawContent) return { expression: "happy", cleanContent: "" };
 
-  const trimmedContent = rawContent.trimStart();
+  let cleanContent = rawContent;
+  let expression: WingmanEmotion = "happy";
 
-  // 1. Full Match: "[EXPRESSION: happy] content..."
-  const fullMatch = trimmedContent.match(/^\[EXPRESSION:\s*([a-zA-Z]+)\]\s*/i);
-  if (fullMatch) {
-    const expr = fullMatch[1].trim();
-    const found = (KNOWN_EXPRESSIONS.find(k => k.toLowerCase() === expr.toLowerCase()) || "happy") as WingmanEmotion;
+  // 1. Process all completed expression tags in the message
+  const expressionRegex = /\[EXPRESSION:\s*([a-zA-Z]+)\]/gi;
+  let match;
+  let lastFoundExpr: string | null = null;
 
-    // Side effect: update engine
-    emotionEngine.transition(found);
-
-    return {
-      expression: found,
-      cleanContent: trimmedContent.substring(fullMatch[0].length)
-    };
+  while ((match = expressionRegex.exec(rawContent)) !== null) {
+    lastFoundExpr = match[1];
   }
 
-  // 2. Partial Match: Handle streaming "[EXPRE" state to hide raw formatting
-  const partialMatch = trimmedContent.match(/^\[(E(X(P(R(E(S(S(I(O(N(:(\s*[a-zA-Z]*)?)?)?)?)?)?)?)?)?)?)?)?$/i);
-  if (partialMatch || trimmedContent.startsWith('[EXPRESSION')) {
-    // Try parsing the raw word so far
-    const tagContent = trimmedContent.replace(/^\[EXPRESSION:\s*/i, '');
-    const found = (KNOWN_EXPRESSIONS.find(k => k.toLowerCase().startsWith(tagContent.toLowerCase())) || "thinking") as WingmanEmotion;
+  if (lastFoundExpr) {
+    const expr = lastFoundExpr.trim();
+    const found = (KNOWN_EXPRESSIONS.find(k => k.toLowerCase() === expr.toLowerCase()) || "happy") as WingmanEmotion;
+    expression = found === "excited" ? "happy" : found;
 
-    // Side effect: update engine with transient state
-    emotionEngine.transition(found);
+    // Side effect: update engine with the latest parsed emotion
+    emotionEngine.transition(expression);
+  }
 
-    return {
-      expression: found,
-      cleanContent: "" // Mask completely until bracket completes
-    };
+  // Strip all completed expression tags from the clean content
+  cleanContent = cleanContent.replace(/\[EXPRESSION:\s*[a-zA-Z]+\]\s*/gi, '');
+
+  // 2. Handle partial/streaming tags at the end of the text to mask them while they are typing
+  const trimmed = cleanContent.trimEnd();
+  const lastBracketIndex = trimmed.lastIndexOf('[');
+
+  if (lastBracketIndex !== -1) {
+    const tagContent = trimmed.substring(lastBracketIndex);
+    // Regex matching any valid prefix of "[EXPRESSION: <letters>"
+    const partialMatchRegex = /^\[(?:E(?:X(?:P(?:R(?:E(?:S(?:S(?:I(?:O(?:N(?::(?:\s*[a-zA-Z]*)?)?)?)?)?)?)?)?)?)?)?)?$/i;
+
+    if (partialMatchRegex.test(tagContent) || tagContent.toLowerCase().startsWith('[expression')) {
+      const emotionMatch = tagContent.match(/\[EXPRESSION:\s*([a-zA-Z]*)/i);
+      const emotionalPrefix = emotionMatch ? emotionMatch[1] : "";
+      const parsed = (KNOWN_EXPRESSIONS.find(k => k.toLowerCase().startsWith(emotionalPrefix.toLowerCase())) || "thinking") as WingmanEmotion;
+      const found = parsed === "proud" ? "happy" : parsed;
+
+      // Side effect: update engine with transient state
+      emotionEngine.transition(found);
+
+      // Mask the partial tag completely
+      cleanContent = cleanContent.substring(0, lastBracketIndex);
+    }
   }
 
   return {
-    expression: "happy",
-    cleanContent: rawContent
+    expression,
+    cleanContent
   };
 }
 

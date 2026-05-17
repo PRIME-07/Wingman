@@ -29,7 +29,7 @@ export type WingmanEmotion =
  * Required for browser ESM module resolution when importing the type by name.
  */
 export const WingmanEmotion = {
-  neutral: 'neutral',
+  neutral: 'happy',
   thinking: 'thinking',
   recollecting: 'recollecting',
   happy: 'happy',

@@ -20,7 +20,8 @@ export function LiveActivitiesSidebar() {
     setActiveTimers,
     upcomingEvents,
     setUpcomingEvents,
-    reminders
+    reminders,
+    currentSessionId
   } = useChatStore();
 
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -50,8 +51,8 @@ export function LiveActivitiesSidebar() {
   const fetchLiveActivities = async () => {
     setIsRefreshing(true);
     try {
-      // 1. Fetch Timers
-      const timerRes = await fetch(`${API_BASE_URL}/tools/clock/timers`);
+      // 1. Fetch Timers (scoped to currentSessionId to align with user's current session context)
+      const timerRes = await fetch(`${API_BASE_URL}/tools/clock/timers?session_id=${currentSessionId || ''}`);
       if (timerRes.ok) {
         const data = await timerRes.json();
         setActiveTimers(data.active_timers || []);
@@ -89,7 +90,7 @@ export function LiveActivitiesSidebar() {
       clearInterval(interval);
       window.removeEventListener('refresh-calendar', handleRefreshTrigger);
     };
-  }, []);
+  }, [currentSessionId]);
 
   const handleCancelTimer = async (timerId: string) => {
     try {
@@ -267,7 +268,13 @@ export function LiveActivitiesSidebar() {
 
 function TimerItem({ timer, onCancel }: { timer: any, onCancel: (id: string) => void }) {
   const [timeLeft, setTimeLeft] = useState(timer.remaining_seconds);
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(timer.remaining_seconds <= 0);
+
+  // Sync state if props change (e.g. on live activities updates)
+  useEffect(() => {
+    setTimeLeft(timer.remaining_seconds);
+    setIsCompleted(timer.remaining_seconds <= 0);
+  }, [timer.remaining_seconds]);
 
   useEffect(() => {
     if (timeLeft <= 0) {

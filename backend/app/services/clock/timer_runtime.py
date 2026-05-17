@@ -104,7 +104,8 @@ class TimerRuntime:
                 "timer_id": tid,
                 "label": r["label"],
                 "expires_at": r["expires_at"],
-                "remaining_seconds": round(remaining, 1)
+                "remaining_seconds": round(remaining, 1),
+                "duration_seconds": r["seconds"]
             })
         return active
 

@@ -180,11 +180,16 @@ export function useWingmanConnection(threadId: string = 'default-session') {
               message: event.message || `Your timer "${event.label}" has finished.`,
               severity: 'high'
             });
+            // Automatically refresh to remove the finished timer from the active list
+            window.dispatchEvent(new CustomEvent('refresh-calendar'));
           }
 
-          // Proactive Calendar Refresh Logic: Intercept calendar tool modifications/queries
-          if (event.tool_name?.startsWith('calendar_') && (event.event === 'tool_end' || event.event_type === 'tool_end')) {
-            console.log('[Telemetry] Calendar Tool execution completed:', event.tool_name);
+          // Proactive Calendar & Timer Refresh Logic: Intercept calendar/timer tool modifications/queries
+          if (
+            (event.tool_name?.startsWith('calendar_') || event.tool_name?.startsWith('timer_')) && 
+            (event.event === 'tool_end' || event.event_type === 'tool_end' || event.event === 'tool_completed' || event.event_type === 'tool_completed')
+          ) {
+            console.log('[Telemetry] Tool execution completed:', event.tool_name);
             window.dispatchEvent(new CustomEvent('refresh-calendar'));
           }
 

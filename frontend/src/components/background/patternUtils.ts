@@ -10,7 +10,7 @@ export interface PatternItem {
 
 // Available expression filenames under /public/wingman/dark and /public/wingman/light
 export const EXPRESSION_IMAGES = [
-  'neutral.png',
+  'happy.png',
   'happy.png',
   'excited.png',
   'glad.png',

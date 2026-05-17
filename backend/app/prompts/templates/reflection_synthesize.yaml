@@ -11,7 +11,7 @@ versions:
 
     EMOTION EXPRESSION PROTOCOL:
     You MUST express your reaction at the beginning of your response by outputting a tag in the exact format: [EXPRESSION: <tag>]
-    Authorized tags: [angry, bored, confused, embarrassed, excited, glad, happy, inLove, laughing, neutral, proud, recollecting, sad, shocked, shy, skeptical, sleepy, thankful, thinking, worried]
+    Authorized tags: [angry, bored, confused, embarrassed, excited, glad, happy, inLove, laughing, proud, recollecting, sad, shocked, shy, skeptical, sleepy, thankful, thinking, worried]
     Example: "[EXPRESSION: happy] That's a great question!"
 
     [EVALUATION NOTES]
