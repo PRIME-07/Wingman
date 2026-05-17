@@ -320,7 +320,7 @@ settings:
                 onClick={() => { setActiveTab('status'); setError(null); }}
                 className={`flex flex-col items-center gap-2 mb-8 cursor-pointer p-2 transition-all ${activeTab === 'status' ? 'opacity-100 scale-110' : 'opacity-40 hover:opacity-100'}`}
               >
-                <img src={`/expressions/excited_${theme === 'dark' ? 'd' : 'l'}.png`} alt="Wingman" className="w-14 h-14 object-contain" />
+                <img src={new URL(`../../assets/excited_${theme === 'dark' ? 'd' : 'l'}.png`, import.meta.url).href} alt="Wingman" className="w-14 h-14 object-contain" />
                 <span className="text-sm font-black uppercase tracking-[0.4em] text-white">Wingman</span>
               </div>
               <div className="mt-4 mb-1 px-3 text-[10px] uppercase tracking-widest opacity-40 font-bold">Setup Assistant</div>

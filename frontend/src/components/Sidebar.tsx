@@ -557,7 +557,7 @@ export function Sidebar() {
   };
 
   // Small Mascot Avatar for the very top of sidebar activity bar
-  const mascotIconSrc = `/expressions/happy_${theme === 'dark' ? 'd' : 'l'}.png`;
+  const mascotIconSrc = new URL(`../../assets/happy_${theme === 'dark' ? 'd' : 'l'}.png`, import.meta.url).href;
 
   return (
     <div className="h-full flex select-none z-20 relative shrink-0">

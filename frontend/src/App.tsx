@@ -25,7 +25,8 @@ function App() {
     wsConnected,
     fetchHistory,
     isRightSidebarOpen,
-    setRightSidebarOpen
+    setRightSidebarOpen,
+    activeTimers
   } = useChatStore();
 
   // Hydration guard — starts true, blocks WelcomeView until fetchHistory completes.
@@ -77,7 +78,7 @@ function App() {
               </div>
               
               <div className="flex items-center gap-4">
-                {!isRightSidebarOpen && (
+                {!isRightSidebarOpen && activeTimers.length > 0 && (
                   <button 
                     onClick={() => setRightSidebarOpen(true)}
                     className="p-2 rounded-lg border border-mono-200 dark:border-mono-800 text-mono-500 hover:text-mono-900 dark:hover:text-white transition-all flex items-center gap-2"
@@ -124,7 +125,7 @@ function App() {
 
       {/* 3. Right Activity Pane */}
       <AnimatePresence>
-        {isRightSidebarOpen && <LiveActivitiesSidebar />}
+        {isRightSidebarOpen && activeTimers.length > 0 && <LiveActivitiesSidebar />}
       </AnimatePresence>
 
       {/* Dynamic Overlay Components */}

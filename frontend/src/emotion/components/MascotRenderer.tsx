@@ -23,9 +23,9 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
 }) => {
   const { theme } = useChatStore();
   
-  // Construct canonical asset path: /expressions/{emotion}_{l|d}.png
+  // Construct canonical asset path: /assets/{emotion}_{l|d}.png
   const suffix = theme === 'dark' ? 'd' : 'l';
-  const src = `/expressions/${emotion}_${suffix}.png`;
+  const src = new URL(`../../../assets/${emotion}_${suffix}.png`, import.meta.url).href;
 
   return (
     <div className={`relative flex items-center justify-center overflow-hidden ${SIZE_MAP[size]} ${className}`}>
@@ -36,7 +36,7 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
         draggable={false}
         onError={(e) => {
           // Fallback to happy if asset is missing
-          (e.target as HTMLImageElement).src = `/expressions/happy_${suffix}.png`;
+          (e.target as HTMLImageElement).src = new URL(`../../../assets/happy_${suffix}.png`, import.meta.url).href;
         }}
       />
     </div>

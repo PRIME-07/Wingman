@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="frontend/assets/Wingman_logo_readme.png" alt="Wingman Logo" width="600" />
+</p>
+
 # Wingman
 > **The ultimate personalized AI operating system.** Empowered by deep long-term episodic and semantic memory, autonomous tool orchestration, distributed background tasks, and a visually stunning, minimalist command center.
 
@@ -76,6 +80,18 @@ Nightly system maintenance is decoupled from user API request threads to avoid p
 *   **System:** Handled by an **Arq** (Redis-backed Async Job Queue) background runner daemon.
 *   **Cron Operations:** Triggers at 03:00 AM daily to synthesize the day's MongoDB conversations, inject new connections into Neo4j, and decay expired vector states.
 
+### 5. Multi-Agent Orchestrator Model (CEO & Department Heads)
+Wingman's execution engine is built around a centralized **Orchestrator Node (The CEO)** delegating specific tasks to a suite of highly-specialized **Sub-Agents (Department Heads)**. Each Sub-Agent runs a localized **ReAct (Reasoning and Action) loop** with custom prompting, local LLM configurations, and isolated atomic tool access:
+*   **🌐 Web Research Agent (`web_agent`):** Searches the internet and resolves public information (Weather, YouTube, WebSearch). Fully localized to India (INR pricing, Indian relevance) by default.
+*   **✉️ Communication Agent (`comm_agent`):** Handles drafts and channels (Gmail, Slack, Contacts). Fully personalized to write as **Anuj Mankumare** and strictly verifies destination channels prior to execution.
+*   **💼 Workspace Agent (`work_agent`):** Directs personal productivity (Google Calendar, Drive Docs & Sheets, Google Maps routes, and System Alarms/Timers). Proactively returns clickable document links, metric measurement conversions, and suppresses internal UUID strings.
+*   **📚 Knowledge/RAG Agent (`rag_agent`):** Queries user-uploaded archives and permanent episodic records via document vector retrieval tools.
+
+#### 🛡️ Idempotent Execution Cache
+To prevent redundant API side-effects when the graph gets suspended for a **Human-in-the-Loop (HITL)** approval check, Wingman implements an atomic caching layer:
+*   **Caching Strategy:** Every tool execution result is cataloged inside MongoDB's `tool_execution_cache` hashed by `run_id`, `agent_name`, `tool_name`, `arguments`, and its sequence index.
+*   **Safe Replay:** When a user approves or resumes a suspended graph, the node replays sequentially. Cached results are fed back instantly without triggering repeated external network hits (e.g. sending a duplicate email or making redundant API calls).
+
 ---
 
 ## 🛠 Tech Stack & Infrastructure
@@ -93,12 +109,36 @@ Nightly system maintenance is decoupled from user API request threads to avoid p
 *   **Visual Styling:** Pure Black-and-White aesthetics, Space Mono Google Font layout, TailwindCSS grid.
 *   **Markdown Support:** `react-markdown` with `remark-gfm` parsing code blocks.
 
+### 🐳 Container Infrastructure Stack
+Wingman's orchestration environment is fully modularized using Docker Compose. The localized network architecture decomposes the runtime environment into 7 functional containers:
+1.  **🚀 FastAPI Backend (`wingman-backend`):** 
+    *   **Role:** Core ASGI application server.
+    *   **Functions:** Coordinates cognitive LangGraph execution, services all RESTful endpoints, handles bidirectional real-time WebSocket communication, parses dynamic environment overrides, and emits telemetry stream sequences. It features live hot-reloading by mounting the local backend folder as a Docker volume.
+2.  **⚙️ Async Daemon Worker (`wingman-worker`):**
+    *   **Role:** Redis-backed Arq scheduler and background worker.
+    *   **Functions:** Offloads computationally intensive processes (such as PDF/document ingestion and deep vector embedding parsing) from user request threads. Natively runs scheduled noctural cron jobs (at 03:00 AM) to synthesize past messages and consolidate memory states without degrading server latency.
+3.  **⚛️ React Frontend Client (`wingman-frontend`):**
+    *   **Role:** Vite development and production delivery server.
+    *   **Functions:** Bundles and renders the visually stunning space-mono black-and-white visual interface. Maintains connection states via Zustand stores, handles dynamic asset loading, and captures localized user metrics.
+4.  **💾 Archive Database (`wingman-mongodb`):**
+    *   **Role:** Raw document and configuration database.
+    *   **Functions:** Ground-truth persistence layer for chronological conversation histories, global settings schemas, and active credential properties. It also hosts the critical idempotent caching ledger `tool_execution_cache` to safeguard integrations from repeated calls during graph replays.
+5.  **🕸️ Graph Memory Database (`wingman-neo4j`):**
+    *   **Role:** Episodic and semantic knowledge graph.
+    *   **Functions:** Maps synthesized episodic facts, user behaviors, and abstract concepts into connected nodes and relations. Enables multi-turn factual retrieval across disparate conversation sessions.
+6.  **⚡ Cache & Queue Broker (`wingman-redis`):**
+    *   **Role:** High-speed in-memory database and message broker.
+    *   **Functions:** Powers the high-throughput task queue for the isolated Arq workers and caches transient transaction states between frontend and backend.
+7.  **🔍 Local Vector Storage (`wingman-chromadb`):**
+    *   **Role:** Chromadb vector embeddings database.
+    *   **Functions:** Hosts semantic vector indices generated from uploaded documents using text-embedding models. Manages isolated user knowledge collections, running high-speed semantic searches for RAG tools.
+
 ---
 
 ## 🏁 Quickstart Guide
 
 ### 🐳 Method 1: Run Stack via Docker Compose (Recommended)
-Clone the repository, ensure your root `.env` credentials are set, and boot all 5 micro-containers simultaneously (FastAPI, React Frontend, MongoDB, Neo4j, and Redis):
+Clone the repository, boot all 5 micro-containers simultaneously (FastAPI, React Frontend, MongoDB, Neo4j, and Redis), and configure all credentials seamlessly directly from the UI onboarding setup assistant (no manual `.env` file editing required!):
 ```bash
 # 1. Clone and enter repository
 git clone https://github.com/PRIME-07/Wingman.git
@@ -166,6 +206,23 @@ npm run dev
 ---
 
 ## 🔧 Detailed Setup Guide
+
+### 🌐 Zero-Config Onboarding (Easiest & Recommended)
+Wingman features a complete **Zero-Config Onboarding workflow** built directly into the user interface. You don't have to deal with terminal editors, `.env` file configurations, or container restarts! 
+
+#### 1. First-Time Setup Assistant Wizard
+When you boot Wingman and open the interface for the first time, you will be welcomed by an interactive **Setup Assistant**. This wizard walks you through setting up all necessary environment variables:
+*   **LLM Engine Credentials:** Enter your OpenAI API key or other model keys.
+*   **Memory & Vector Databases:** Easily input your Pinecone Environment, API Key, and Neo4j Aura database credentials to enable persistent long-term agent memory.
+*   **Integrations & Tooling:** Enter API credentials for search engines, maps, weather feeds, and YouTube to power the agent's real-time tools.
+
+#### 2. Reconfiguring or Accessing Settings Later
+Need to change an API key, add a new integration, or verify your connection status later? 
+*   **Access Path:** Simply click the **Plug/Socket Icon** (Integrations Tab) on the leftmost Activity Bar of the sidebar.
+*   **Configure Button:** Click the **"Configure"** button in the top-right corner of the pane.
+*   This will bring back the Setup Assistant panel, allowing you to update any environment variables, credentials, or third-party connections on the fly!
+
+---
 
 ### Google Cloud Setup
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/).

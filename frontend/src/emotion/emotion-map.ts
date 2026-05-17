@@ -3,7 +3,6 @@
  * Matches assets in public/expressions/
  */
 export type WingmanEmotion = 
-  | 'neutral'
   | 'thinking'
   | 'recollecting'
   | 'happy'
@@ -29,7 +28,6 @@ export type WingmanEmotion =
  * Required for browser ESM module resolution when importing the type by name.
  */
 export const WingmanEmotion = {
-  neutral: 'happy',
   thinking: 'thinking',
   recollecting: 'recollecting',
   happy: 'happy',
@@ -53,7 +51,7 @@ export const WingmanEmotion = {
 
 
 export const ALL_EMOTIONS: WingmanEmotion[] = [
-  'neutral', 'thinking', 'recollecting', 'happy', 'sad', 
+  'thinking', 'recollecting', 'happy', 'sad', 
   'laughing', 'excited', 'glad', 'proud', 'confused', 
   'embarrassed', 'skeptical', 'shy', 'thankful', 'inLove', 
   'sleepy', 'worried', 'angry', 'bored', 'shocked'
@@ -82,6 +80,6 @@ export const EMOTION_PRIORITY: Record<WingmanEmotion, number> = {
   recollecting: 25,
   thinking: 20,
   sleepy: 15,
-  bored: 10,
-  neutral: 0
+  bored: 10
 };
+
