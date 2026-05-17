@@ -1,4 +1,4 @@
-# 🦅 Wingman
+# Wingman
 > **The ultimate personalized AI operating system.** Empowered by deep long-term episodic and semantic memory, autonomous tool orchestration, distributed background tasks, and a visually stunning, minimalist command center.
 
 ---
