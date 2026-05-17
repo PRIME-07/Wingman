@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: wingman-backend
+    volumes:
+      # Mount host code to container for real-time hot reloading
+      - ./backend:/app/backend
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+      - neo4j
+    networks:
+      - wingman-network
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: wingman-worker
+    command: arq backend.app.worker.arq_worker.WorkerSettings
+    volumes:
+      - ./backend:/app/backend
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+      - neo4j
+      - redis
+    networks:
+      - wingman-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: wingman-frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules # Avoid host node_modules shadowing
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api/v1
+    networks:
+      - wingman-network
+
+  mongodb:
+    image: mongo:latest
+    container_name: wingman-mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - wingman-network
+
+  neo4j:
+    image: neo4j:latest
+    container_name: wingman-neo4j
+    restart: always
+    ports:
+      - "7474:7474" # HTTP Web Interface
+      - "7687:7687" # Bolt Protocol Port
+    environment:
+      - NEO4J_AUTH=neo4j/password
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - wingman-network
+  redis:
+    image: redis:7-alpine
+    container_name: wingman-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - wingman-network
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: wingman-chromadb
+    restart: always
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    networks:
+      - wingman-network
+
+networks:
+  wingman-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  neo4j_data:
+  chroma_data:

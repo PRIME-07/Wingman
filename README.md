@@ -97,11 +97,11 @@ Nightly system maintenance is decoupled from user API request threads to avoid p
 
 ## 🏁 Quickstart Guide
 
-### 🐳 Step 1: Run Stack via Docker Compose (Recommended)
+### 🐳 Method 1: Run Stack via Docker Compose (Recommended)
 Clone the repository, ensure your root `.env` credentials are set, and boot all 5 micro-containers simultaneously (FastAPI, React Frontend, MongoDB, Neo4j, and Redis):
 ```bash
 # 1. Clone and enter repository
-git clone <YOUR_REPOSITORY_URL>
+git clone https://github.com/PRIME-07/Wingman.git
 cd Wingman
 
 # 2. Boot the complete stack
@@ -112,7 +112,7 @@ docker compose up --build
 *   **⚡ FastAPI Swagger Docs:** [http://localhost:8000/docs](http://localhost:8000/docs)
 *   **🕸️ Neo4j Database Console:** [http://localhost:7474](http://localhost:7474)
 
-### 💻 Step 2: Running Local Development (Without Docker)
+### 💻 Method 2: Running Local Development (Without Docker)
 
 #### A. Setup Backend 🐍
 ```bash
@@ -175,11 +175,10 @@ npm run dev
    - Google Calendar API
    - Google Maps JavaScript API
    - YouTube Data API v3
-4. Go to **OAuth consent screen**:
+4. Go to **APIs & Services > OAuth consent screen**:
    - Choose **External**.
    - Add your email and developer contact info.
-   - Add scopes: `.../auth/drive.readonly`, `.../auth/calendar.readonly`.
-5. Go to **Credentials**:
+5. Go to **APIs & Services > Credentials**:
    - Click **Create Credentials > OAuth client ID**.
    - Application type: **Web application**.
    - Authorized redirect URIs: `http://localhost:8000/api/v1/auth/callback/google`.

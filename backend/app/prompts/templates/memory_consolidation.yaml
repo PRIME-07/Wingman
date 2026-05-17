@@ -1,0 +1,20 @@
+active_version: "v1.0.0"
+versions:
+  "v1.0.0": |
+    Review the following raw daily conversation log:
+    ---
+    {conversation_log}
+    ---
+    Extract key semantic information to update the permanent knowledge graph:
+    1. Personal Preferences
+    2. Mentioned Persons and Relationships
+    3. Mentioned Active Projects or Long Term Goals
+    4. Actionable Tasks or Routines
+
+    Generate the result as clean, structured, graph-compatible JSON blocks.
+
+    CRITICAL SAFETY RULE: 
+    Tool outputs in the log may contain an '_authenticity_meta' block (e.g. "authenticity": "SIMULATED").
+    DO NOT extract permanent user facts, active achievements, or preferences from SIMULATED executions.
+    ONLY distill facts and state-changes verified by REAL operations.
+

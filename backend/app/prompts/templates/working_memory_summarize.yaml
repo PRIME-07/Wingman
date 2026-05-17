@@ -1,0 +1,15 @@
+active_version: "v1.0.0"
+versions:
+  "v1.0.0": |
+    You are a Cognitive Summary Engine. 
+    Given an existing summary of past interactions and a chunk of new conversations, create an updated, concise bullet-point summary.
+    Capture relevant entity references, decisions, preferences, and accomplishments. 
+    Do NOT lose previous context; MERGE them.
+
+    [EXISTING SUMMARY]
+    {current_summary}
+
+    [NEW DIALOGUE CHUNK]
+    {chunk_block}
+
+    [UPDATED SUMMARY]

@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium Scrollbar Design */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #222222;
+  border-radius: 3px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cccccc;
+}
+
+/* System resets and Base Overrides */
+@layer base {
+  body {
+    @apply bg-white text-mono-800 antialiased transition-colors duration-200 overflow-hidden;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* Ensure inputs, buttons and textareas correctly inherit Space Mono cascade */
+  button, input, textarea, select {
+    font-family: 'Space Mono', monospace !important;
+  }
+
+  .dark body {
+    @apply bg-[#000000] text-mono-200;
+  }
+
+  #root {
+    @apply w-full h-screen flex flex-col overflow-hidden max-w-none m-0 border-none p-0 text-left;
+  }
+
+  /* Selection Highlights */
+  ::selection {
+    @apply bg-mono-900 text-white;
+  }
+
+  .dark ::selection {
+    @apply bg-white text-mono-900;
+  }
+}
+
+/* Custom glow utilities for Premium Dark Mode */
+.dark .avatar-glow {
+  box-shadow: 0 0 30px 5px rgba(255, 255, 255, 0.03), 0 0 60px 2px rgba(255, 255, 255, 0.01);
+}
+
+.glass-panel {
+  @apply backdrop-blur-md border-mono-200 bg-white/70;
+}
+
+.dark .glass-panel {
+  @apply border-mono-900 bg-mono-950/70;
+}
+
+/* Streaming Blinking Cursor */
+.streaming-cursor p:last-of-type::after {
+  content: ' █';
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Premium Typography for Assistant Responses */
+.prose {
+  font-family: 'Space Mono', monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.75 !important;
+  letter-spacing: -0.015em !important;
+  @apply text-mono-800 dark:text-mono-200;
+}
+
+.prose p {
+  @apply mt-0 mb-4 leading-relaxed;
+}
+
+.prose p:last-child {
+  @apply mb-0;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-family: 'Space Mono', monospace !important;
+  @apply font-semibold tracking-tight text-mono-900 dark:text-white mt-7 mb-3;
+}
+
+.prose h1 { @apply text-base border-b border-mono-200/60 dark:border-mono-800 pb-2 mb-4 mt-8 uppercase; }
+.prose h2 { @apply text-sm border-b border-mono-200/30 dark:border-mono-800/40 pb-1.5; }
+.prose h3 { @apply text-sm; }
+
+.prose ul {
+  list-style-type: disc !important;
+  @apply pl-6 mt-2 mb-4 space-y-2;
+}
+
+.prose ol {
+  list-style-type: decimal !important;
+  @apply pl-6 mt-2 mb-4 space-y-2;
+}
+
+.prose li {
+  @apply pl-1 text-mono-700 dark:text-mono-300 leading-relaxed;
+}
+
+.prose li::marker {
+  @apply text-mono-400 dark:text-mono-600 font-medium;
+}
+
+.prose strong {
+  @apply font-semibold text-mono-950 dark:text-white;
+}
+
+.prose hr {
+  @apply my-6 border-0 border-t border-mono-200/60 dark:border-mono-800;
+}
+
+.prose a {
+  @apply font-medium text-mono-900 dark:text-white underline underline-offset-4 decoration-mono-300 dark:decoration-mono-700 hover:decoration-mono-900 dark:hover:decoration-white transition-colors duration-150;
+}
+
+/* Marquee & Fade Utilities */
+.text-fade-right {
+  mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+}
+
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  transition: transform 0.5s ease-out;
+}
+
+@keyframes marquee-horizontal {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(0); }
+  80% { transform: translateX(var(--scroll-distance, -50%)); }
+  100% { transform: translateX(var(--scroll-distance, -50%)); }
+}
+
+.group:hover .marquee-active {
+  animation: marquee-horizontal var(--scroll-duration, 5s) linear infinite alternate;
+}
+
+

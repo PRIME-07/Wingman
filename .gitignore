@@ -1,0 +1,4 @@
+.env
+mission_control/
+__pycache__
+*.pyc

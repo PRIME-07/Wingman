@@ -1,0 +1,1402 @@
+2026-05-15 10:44:10,917 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:47:00,839 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:47:00,840 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:47:01,078 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:47:01,116 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:47:01,516 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:47:04,121 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:47:05,381 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'brithdat'
+2026-05-15 10:47:05,396 [INFO] [wingman:52] - [CredentialManager] Cipher registry loaded successfully with 1 version(s).
+2026-05-15 10:47:05,406 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:47:05,694 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:47:05,746 [WARNING] [wingman:173] - [DocsService] Directory query failure: Google authentication credentials missing.. Returning empty list.
+2026-05-15 10:47:05,747 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:47:05,993 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:47:05,995 [WARNING] [wingman:148] - [CalendarService] Search failure: Google account credentials are not linked or valid.. Returning empty list.
+2026-05-15 10:47:06,259 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'brithday'
+2026-05-15 10:47:06,261 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:47:06,481 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:47:06,490 [WARNING] [wingman:173] - [DocsService] Directory query failure: Google authentication credentials missing.. Returning empty list.
+2026-05-15 10:47:06,491 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:47:06,701 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:47:06,706 [WARNING] [wingman:148] - [CalendarService] Search failure: Google account credentials are not linked or valid.. Returning empty list.
+2026-05-15 10:47:11,580 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'b'
+2026-05-15 10:47:11,583 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:47:11,835 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:47:11,840 [WARNING] [wingman:173] - [DocsService] Directory query failure: Google authentication credentials missing.. Returning empty list.
+2026-05-15 10:47:11,841 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:47:12,052 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:47:12,058 [WARNING] [wingman:148] - [CalendarService] Search failure: Google account credentials are not linked or valid.. Returning empty list.
+2026-05-15 10:47:12,838 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'birt'
+2026-05-15 10:47:12,840 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:47:13,093 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:47:13,098 [WARNING] [wingman:173] - [DocsService] Directory query failure: Google authentication credentials missing.. Returning empty list.
+2026-05-15 10:47:13,099 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:47:13,332 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:47:13,337 [WARNING] [wingman:148] - [CalendarService] Search failure: Google account credentials are not linked or valid.. Returning empty list.
+2026-05-15 10:47:14,183 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'birth'
+2026-05-15 10:47:14,186 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:47:14,412 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:47:14,415 [WARNING] [wingman:173] - [DocsService] Directory query failure: Google authentication credentials missing.. Returning empty list.
+2026-05-15 10:47:14,415 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:47:14,656 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:47:14,661 [WARNING] [wingman:148] - [CalendarService] Search failure: Google account credentials are not linked or valid.. Returning empty list.
+2026-05-15 10:49:03,775 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'birthday'
+2026-05-15 10:49:03,777 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:49:04,136 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:49:04,146 [WARNING] [wingman:173] - [DocsService] Directory query failure: Google authentication credentials missing.. Returning empty list.
+2026-05-15 10:49:04,147 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:49:04,366 [ERROR] [wingman:146] - [GoogleOAuth] CRITICAL ERROR during token evaluation/refresh: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+Traceback (most recent call last):
+  File "/app/backend/app/services/google/oauth.py", line 129, in get_authenticated_credentials
+    creds.refresh(Request())
+  File "/usr/local/lib/python3.11/site-packages/google/auth/credentials.py", line 482, in refresh
+    self._perform_refresh_token(request)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/usr/local/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2026-05-15 10:49:04,369 [WARNING] [wingman:148] - [CalendarService] Search failure: Google account credentials are not linked or valid.. Returning empty list.
+2026-05-15 10:50:48,655 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:50:48,655 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:50:48,756 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 10:50:48,756 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 10:50:48,757 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 10:50:48,758 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 10:50:48,758 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 10:50:49,648 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 10:50:54,040 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 10:50:54,303 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 10:50:54,305 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 10:50:54,362 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 10:50:54,985 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 10:50:55,015 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 10:50:55,016 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 10:50:55,016 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 10:50:55,016 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 10:50:55,043 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 10:50:55,043 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 10:50:55,691 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 10:50:55,728 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 10:50:55,728 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 10:50:55,773 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:50:55,870 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:51:08,185 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:51:08,185 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:51:08,285 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 10:51:08,285 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 10:51:08,286 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 10:51:08,287 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 10:51:08,287 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 10:51:09,891 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 10:51:13,849 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 10:51:13,983 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 10:51:13,985 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 10:51:14,081 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 10:51:14,701 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 10:51:14,754 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 10:51:14,755 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 10:51:14,755 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 10:51:14,755 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 10:51:14,779 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 10:51:14,779 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 10:51:15,344 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 10:51:15,356 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 10:51:15,356 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 10:51:15,641 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:51:17,240 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:51:46,238 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:51:46,238 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:51:46,338 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 10:51:46,338 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 10:51:46,339 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 10:51:46,340 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 10:51:46,340 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 10:51:47,030 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 10:51:49,983 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 10:51:50,109 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 10:51:50,110 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 10:51:50,143 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 10:51:50,892 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 10:51:50,945 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 10:51:50,945 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 10:51:50,945 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 10:51:50,945 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 10:51:50,966 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 10:51:50,966 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 10:51:51,503 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 10:51:51,540 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 10:51:51,540 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 10:51:51,564 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:51:51,602 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:52:06,178 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:52:06,178 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:52:06,278 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 10:52:06,278 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 10:52:06,279 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 10:52:06,279 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 10:52:06,279 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 10:52:07,881 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 10:52:11,006 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 10:52:11,171 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 10:52:11,173 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 10:52:11,211 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 10:52:11,815 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 10:52:11,872 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 10:52:11,872 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 10:52:11,872 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 10:52:11,872 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 10:52:11,894 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 10:52:11,894 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 10:52:12,493 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 10:52:12,505 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 10:52:12,505 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 10:52:14,045 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:52:15,211 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:54:24,351 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:54:24,352 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:54:24,755 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:54:27,763 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:54:29,170 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'Bi'
+2026-05-15 10:54:29,174 [INFO] [wingman:52] - [CredentialManager] Cipher registry loaded successfully with 1 version(s).
+2026-05-15 10:54:29,186 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:54:29,453 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 10:54:29,694 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'Bir'
+2026-05-15 10:54:29,695 [INFO] [wingman:119] - [CredentialManager] Securely stored credentials for 'google' [User=global].
+2026-05-15 10:54:29,695 [INFO] [wingman:142] - [GoogleOAuth] Auto-refresh successful. Stored new access tokens.
+2026-05-15 10:54:29,698 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:29,700 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'Bi'
+2026-05-15 10:54:30,306 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:54:30,307 [INFO] [wingman:119] - [CredentialManager] Securely stored credentials for 'google' [User=global].
+2026-05-15 10:54:30,308 [INFO] [wingman:142] - [GoogleOAuth] Auto-refresh successful. Stored new access tokens.
+2026-05-15 10:54:30,311 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:30,324 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'Bi'
+2026-05-15 10:54:30,951 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:30,952 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'Bir'
+2026-05-15 10:54:31,669 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:31,671 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'Bir'
+2026-05-15 10:54:32,213 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:54:32,214 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'Birth'
+2026-05-15 10:54:32,219 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:32,221 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'Birth'
+2026-05-15 10:54:33,701 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:54:33,702 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:33,704 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'Birth'
+2026-05-15 10:54:34,347 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'Birthday'
+2026-05-15 10:54:34,350 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:34,356 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'Birthday'
+2026-05-15 10:54:34,920 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:54:34,921 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:34,923 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'Birthday'
+2026-05-15 10:54:49,173 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'call'
+2026-05-15 10:54:49,175 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:49,176 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'call'
+2026-05-15 10:54:49,786 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:49,788 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'call'
+2026-05-15 10:54:50,373 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:54:53,201 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'shrave'
+2026-05-15 10:54:53,204 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:53,206 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'shrave'
+2026-05-15 10:54:53,797 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:53,798 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'shrave'
+2026-05-15 10:54:54,370 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:54:54,371 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'shra'
+2026-05-15 10:54:54,375 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:54,381 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'shra'
+2026-05-15 10:54:54,940 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:54:54,941 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:54:54,943 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'shra'
+2026-05-15 10:55:03,106 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'shrav'
+2026-05-15 10:55:03,108 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:55:03,109 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'shrav'
+2026-05-15 10:55:03,742 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:55:03,743 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:55:03,745 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'shrav'
+2026-05-15 10:55:05,966 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'shravani'
+2026-05-15 10:55:05,969 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:55:05,971 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'shravani'
+2026-05-15 10:55:06,547 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:55:06,547 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:55:06,548 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'shravani'
+2026-05-15 10:55:10,089 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'shrav'
+2026-05-15 10:55:10,095 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:55:10,096 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'shrav'
+2026-05-15 10:55:10,752 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:55:10,753 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'shrav'
+2026-05-15 10:55:11,291 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:55:12,741 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'shra'
+2026-05-15 10:55:12,743 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:55:12,744 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'shra'
+2026-05-15 10:55:13,276 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:55:13,278 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:55:13,280 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'shra'
+2026-05-15 10:55:34,439 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'shravani'
+2026-05-15 10:55:34,441 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:55:34,442 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'shravani'
+2026-05-15 10:55:34,988 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:55:34,988 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:55:34,993 [INFO] [wingman:131] - [CalendarService] Searching Calendar events for keyword: 'shravani'
+2026-05-15 10:56:44,859 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:56:44,859 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:56:44,959 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 10:56:44,959 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 10:56:44,960 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 10:56:44,962 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 10:56:44,962 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 10:56:45,839 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 10:56:49,205 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 10:56:49,267 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 10:56:49,269 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 10:56:49,298 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 10:56:49,759 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 10:56:49,859 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 10:56:49,859 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 10:56:49,859 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 10:56:49,859 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 10:56:49,894 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 10:56:49,894 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 10:56:50,531 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 10:56:50,544 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 10:56:50,544 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 10:56:50,551 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:56:50,574 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:56:52,793 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:56:52,794 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:56:53,032 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:56:53,062 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:56:53,472 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:56:56,066 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:57:18,225 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:57:18,225 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:57:18,325 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 10:57:18,325 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 10:57:18,327 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 10:57:18,328 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 10:57:18,328 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 10:57:19,978 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 10:57:23,285 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 10:57:23,519 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 10:57:23,521 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 10:57:23,555 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 10:57:24,148 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 10:57:24,205 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 10:57:24,206 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 10:57:24,206 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 10:57:24,206 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 10:57:24,229 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 10:57:24,229 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 10:57:24,786 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 10:57:24,799 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 10:57:24,799 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 10:57:25,357 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:57:27,276 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:58:42,412 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:58:42,413 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:58:42,512 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 10:58:42,512 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 10:58:48,335 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 10:58:51,443 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 10:58:51,581 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 10:58:51,583 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 10:58:51,626 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 10:58:52,201 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 10:58:52,251 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 10:58:52,252 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 10:58:52,252 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 10:58:52,252 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 10:58:52,278 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 10:58:52,278 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 10:58:52,888 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 10:58:52,903 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 10:58:52,903 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 10:58:53,948 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:58:55,130 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:59:07,150 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:59:07,151 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:59:07,429 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:59:07,436 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 10:59:07,838 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:59:10,433 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 10:59:12,893 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'shra'
+2026-05-15 10:59:12,896 [INFO] [wingman:52] - [CredentialManager] Cipher registry loaded successfully with 1 version(s).
+2026-05-15 10:59:12,908 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:12,909 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'shra'
+2026-05-15 10:59:13,494 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:59:13,496 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:13,509 [INFO] [wingman:135] - [CalendarService] Performing dual-layered search for keyword: 'shra'
+2026-05-15 10:59:16,374 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'sh'
+2026-05-15 10:59:16,376 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:16,378 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'sh'
+2026-05-15 10:59:17,022 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 10:59:17,023 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:17,026 [INFO] [wingman:135] - [CalendarService] Performing dual-layered search for keyword: 'sh'
+2026-05-15 10:59:32,104 [INFO] [wingman:17] - [API-Calendar] Inbound API range query: 2026-04-23T18:30:00.000Z -> 2026-06-07T18:29:59.000Z
+2026-05-15 10:59:32,107 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:32,109 [INFO] [wingman:207] - [CalendarService] Fetching bounded events window: 2026-04-23T18:30:00.000Z to 2026-06-07T18:29:59.000Z
+2026-05-15 10:59:32,675 [INFO] [wingman:17] - [API-Calendar] Inbound API range query: 2026-04-23T18:30:00.000Z -> 2026-06-07T18:29:59.000Z
+2026-05-15 10:59:32,676 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:32,677 [INFO] [wingman:207] - [CalendarService] Fetching bounded events window: 2026-04-23T18:30:00.000Z to 2026-06-07T18:29:59.000Z
+2026-05-15 10:59:36,058 [INFO] [wingman:17] - [API-Calendar] Inbound API range query: 2026-03-24T18:30:00.000Z -> 2026-05-07T18:29:59.000Z
+2026-05-15 10:59:36,060 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:36,061 [INFO] [wingman:207] - [CalendarService] Fetching bounded events window: 2026-03-24T18:30:00.000Z to 2026-05-07T18:29:59.000Z
+2026-05-15 10:59:41,947 [INFO] [wingman:17] - [API-Calendar] Inbound API range query: 2026-04-23T18:30:00.000Z -> 2026-06-07T18:29:59.000Z
+2026-05-15 10:59:41,948 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:41,952 [INFO] [wingman:207] - [CalendarService] Fetching bounded events window: 2026-04-23T18:30:00.000Z to 2026-06-07T18:29:59.000Z
+2026-05-15 10:59:43,411 [INFO] [wingman:17] - [API-Calendar] Inbound API range query: 2026-05-24T18:30:00.000Z -> 2026-07-07T18:29:59.000Z
+2026-05-15 10:59:43,413 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:43,415 [INFO] [wingman:207] - [CalendarService] Fetching bounded events window: 2026-05-24T18:30:00.000Z to 2026-07-07T18:29:59.000Z
+2026-05-15 10:59:49,017 [INFO] [wingman:17] - [API-Calendar] Inbound API range query: 2026-06-23T18:30:00.000Z -> 2026-08-07T18:29:59.000Z
+2026-05-15 10:59:49,020 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:49,021 [INFO] [wingman:207] - [CalendarService] Fetching bounded events window: 2026-06-23T18:30:00.000Z to 2026-08-07T18:29:59.000Z
+2026-05-15 10:59:56,826 [INFO] [wingman:17] - [API-Calendar] Inbound API range query: 2026-04-23T18:30:00.000Z -> 2026-06-07T18:29:59.000Z
+2026-05-15 10:59:56,829 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 10:59:56,830 [INFO] [wingman:207] - [CalendarService] Fetching bounded events window: 2026-04-23T18:30:00.000Z to 2026-06-07T18:29:59.000Z
+2026-05-15 11:00:03,587 [INFO] [wingman:14] - [API-Tools] Servicing request for full tool capabilities registry.
+2026-05-15 11:00:26,627 [INFO] [wingman:184] - [WS] Received prompt from thread 561e5b30-5c12-4297-8d04-7573f318a124
+2026-05-15 11:00:26,654 [INFO] [wingman:28] - [memory_retriever] Retrieving context for: 'Hey, I am Anuj!...'
+2026-05-15 11:00:26,655 [INFO] [wingman:46] - Starting tool run: memory_retrieval [TraceID=tr-5efe54ea]
+2026-05-15 11:00:26,706 [INFO] [wingman:99] - Successfully completed tool run: memory_retrieval in 50.18ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:00:26,731 [INFO] [wingman:39] - [planner] Compiling Execution Plan for: 'Hey, I am Anuj!'
+2026-05-15 11:00:27,299 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.2, Streaming=True
+2026-05-15 11:00:34,797 [INFO] [wingman:102] - [planner] Compiled Plan successfully with 1 steps.
+2026-05-15 11:00:34,854 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:00:34,855 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:00:37,454 [INFO] [wingman:39] - [Router] Tool directives satisfied. Transferring control to: reflection node.
+2026-05-15 11:00:37,455 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.1, Streaming=True
+2026-05-15 11:00:37,480 [INFO] [wingman:66] - [reflection] Auditing system execution performance...
+2026-05-15 11:00:39,599 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.0, Streaming=True
+2026-05-15 11:00:39,601 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:00:41,124 [INFO] [wingman:121] - [reflection] Memory PASSED rigorous verification. Staged for commit.
+2026-05-15 11:00:41,124 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:00:42,962 [WARNING] [wingman:127] - [reflection] Memory REJECTED by anti-hallucination gate: The trace explicitly shows the user says, "Hey, I am Anuj!" and the AI acknowledges the name, but there is no explicit statement that the user prefers being addressed as Anuj. The name is identified, not a preference.
+2026-05-15 11:00:42,962 [INFO] [wingman:130] - [reflection] Persisting 1 fully-audited semantic facts with active provenance tracking.
+2026-05-15 11:00:43,453 [INFO] [wingman:151] - [reflection] Hardened memory archival transaction succeeded.
+2026-05-15 11:07:59,408 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:07:59,408 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:08:00,237 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:08:54,866 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:08:55,091 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:08:55,100 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:08:55,616 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:09:09,264 [INFO] [wingman:184] - [WS] Received prompt from thread 561e5b30-5c12-4297-8d04-7573f318a124
+2026-05-15 11:09:09,276 [INFO] [wingman:28] - [memory_retriever] Retrieving context for: 'Whats the weather like in hyderabad?...'
+2026-05-15 11:09:09,277 [INFO] [wingman:46] - Starting tool run: memory_retrieval [TraceID=tr-b39493b0]
+2026-05-15 11:09:09,278 [INFO] [wingman:99] - Successfully completed tool run: memory_retrieval in 1.02ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:09:09,282 [INFO] [wingman:39] - [planner] Compiling Execution Plan for: 'Whats the weather like in hyderabad?'
+2026-05-15 11:09:09,823 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.2, Streaming=True
+2026-05-15 11:09:14,625 [INFO] [wingman:102] - [planner] Compiled Plan successfully with 1 steps.
+2026-05-15 11:09:14,647 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:09:14,648 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:09:16,749 [INFO] [wingman:28] - [Router] Tool invocation directives active. Routing to: work_agent.
+2026-05-15 11:09:16,750 [INFO] [wingman:43] - [SubAgent] Waking work_agent...
+2026-05-15 11:09:16,750 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:09:18,389 [INFO] [wingman:46] - Starting tool run: weather_query [TraceID=tr-b39493b0]
+2026-05-15 11:09:18,390 [INFO] [wingman:24] - [WeatherTool] Querying atmospheric state for: 'Hyderabad' for 3 days.
+2026-05-15 11:09:18,390 [INFO] [wingman:40] - [WeatherService] Dispatching OpenWeatherMap evaluation for location='Hyderabad'...
+2026-05-15 11:09:18,566 [INFO] [wingman:56] - [WeatherTool] Forecast successfully compiled for 'Hyderabad'.
+2026-05-15 11:09:18,568 [INFO] [wingman:99] - Successfully completed tool run: weather_query in 179.44ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:09:21,186 [INFO] [wingman:110] - [SubAgent] work_agent finished task in 4435.31ms.
+2026-05-15 11:09:21,214 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:09:21,215 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:09:25,236 [INFO] [wingman:39] - [Router] Tool directives satisfied. Transferring control to: reflection node.
+2026-05-15 11:09:25,237 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.1, Streaming=True
+2026-05-15 11:09:25,249 [INFO] [wingman:66] - [reflection] Auditing system execution performance...
+2026-05-15 11:09:28,479 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.0, Streaming=True
+2026-05-15 11:09:28,479 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:09:29,811 [INFO] [wingman:121] - [reflection] Memory PASSED rigorous verification. Staged for commit.
+2026-05-15 11:09:29,811 [INFO] [wingman:102] - [reflection] Routing memory candidate 'conversation' to anti-hallucination gateway...
+2026-05-15 11:09:31,513 [WARNING] [wingman:123] - [reflection] Memory BLOCKED by Knowledge Boundary Layer: Speculative/Ephemeral class 'Context' excluded from Neo4j.
+2026-05-15 11:09:31,513 [INFO] [wingman:130] - [reflection] Persisting 1 fully-audited semantic facts with active provenance tracking.
+2026-05-15 11:09:32,185 [INFO] [wingman:151] - [reflection] Hardened memory archival transaction succeeded.
+2026-05-15 11:09:32,191 [INFO] [wingman:40] - [ProgressiveNaming] Trigger hit at turn 2 for Session=561e5b30-5c12-4297-8d04-7573f318a124. Reviewing title...
+2026-05-15 11:09:32,192 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.2, Streaming=True
+2026-05-15 11:09:35,433 [INFO] [wingman:77] - [ProgressiveNaming] Evaluated Candidate='Hyderabad Weather Check' [Conf=0.97] vs Current='Test Session 1' [Conf=0.00]
+2026-05-15 11:09:35,433 [INFO] [wingman:86] - [ProgressiveNaming] UPGRADING session name to: 'Hyderabad Weather Check'
+2026-05-15 11:12:31,450 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:12:33,030 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:16:11,233 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:16:11,333 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:16:11,333 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:16:11,334 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:16:11,335 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:16:11,335 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:16:12,146 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:16:16,955 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:16:17,123 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:16:17,125 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:16:17,169 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:16:17,822 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:16:17,880 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:16:17,880 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:16:17,880 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:16:17,880 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:16:17,904 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:16:17,904 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:16:18,552 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:16:18,567 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:16:18,567 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:16:18,581 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:16:25,486 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:16:25,586 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:16:25,586 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:16:25,587 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:16:25,588 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:16:25,588 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:16:27,011 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:16:30,477 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:16:30,890 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:16:30,892 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:16:30,929 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:16:31,908 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:16:31,990 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:16:31,991 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:16:31,991 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:16:31,991 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:16:32,015 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:16:32,015 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:16:32,590 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:16:32,609 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:16:32,609 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:16:34,565 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:17:18,975 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:17:20,470 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:17:26,454 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:17:26,554 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:17:26,554 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:17:26,555 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:17:26,556 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:17:26,556 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:17:27,466 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:17:30,755 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:17:30,853 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:17:30,854 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:17:30,891 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:17:31,813 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:17:31,961 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:17:31,961 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:17:31,961 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:17:31,961 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:17:32,018 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:17:32,018 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:17:32,631 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:17:32,647 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:17:32,647 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:17:32,669 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:21:10,918 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:21:11,018 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:21:11,018 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:21:11,019 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:21:11,020 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:21:11,020 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:21:12,999 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:21:17,109 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:21:17,283 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:21:17,284 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:21:17,319 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:21:17,949 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:21:18,010 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:21:18,010 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:21:18,010 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:21:18,010 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:21:18,036 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:21:18,036 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:21:18,725 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:21:18,820 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:21:18,820 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:21:19,975 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:22:19,392 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:22:19,492 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:22:19,492 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:22:19,493 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:22:19,494 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:22:19,494 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:22:20,414 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:22:24,843 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:22:24,971 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:22:24,972 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:22:25,020 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:22:25,680 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:22:25,747 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:22:25,748 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:22:25,748 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:22:25,748 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:22:25,797 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:22:25,797 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:22:26,425 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:22:26,440 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:22:26,441 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:22:26,542 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:22:26,542 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:22:26,543 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:22:26,543 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:22:26,543 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:22:27,190 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:22:30,270 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:22:30,384 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:22:30,385 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:22:30,416 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:22:31,035 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:22:31,100 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:22:31,101 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:22:31,101 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:22:31,101 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:22:31,124 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:22:31,124 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:22:31,660 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:22:31,673 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:22:31,673 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:22:31,774 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:22:31,774 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:22:31,775 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:22:31,776 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:22:31,776 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:22:32,545 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:22:36,167 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:22:36,294 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:22:36,295 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:22:36,337 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:22:36,845 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:22:36,971 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:22:36,972 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:22:36,972 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:22:36,972 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:22:37,022 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:22:37,022 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:22:37,657 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:22:37,669 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:22:37,670 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:22:37,770 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:22:37,771 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:22:37,771 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:22:37,772 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:22:37,772 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:22:38,505 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:22:41,768 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:22:42,083 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:22:42,085 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:22:42,119 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:22:42,781 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:22:42,964 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:22:42,965 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:22:42,965 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:22:42,965 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:22:42,988 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:22:42,988 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:22:43,535 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:22:43,565 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:22:43,565 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:22:43,645 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:22:43,719 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:22:45,456 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:23:15,207 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:23:15,307 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:23:15,307 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:23:15,308 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:23:15,309 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:23:15,309 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:23:16,021 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:23:19,040 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:23:19,188 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:23:19,189 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:23:19,220 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:23:19,730 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:23:19,865 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:23:19,867 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:23:19,867 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:23:19,867 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:23:19,912 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:23:19,913 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:23:20,504 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:23:20,515 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:23:20,515 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:23:20,616 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:23:20,616 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:23:20,617 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:23:20,617 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:23:20,617 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:23:21,440 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:23:25,319 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:23:25,475 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:23:25,476 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:23:25,511 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:23:25,934 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:23:25,995 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:23:25,996 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:23:25,996 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:23:25,996 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:23:26,019 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:23:26,019 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:23:26,642 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:23:26,652 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:23:26,652 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:23:26,662 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:23:49,521 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:23:49,621 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:23:49,621 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:23:49,622 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:23:49,623 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:23:49,623 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:23:51,234 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:23:54,923 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:23:55,053 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:23:55,054 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:23:55,088 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:23:55,514 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:23:55,573 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:23:55,573 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:23:55,573 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:23:55,573 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:23:55,597 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:23:55,597 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:23:56,151 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:23:56,161 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:23:56,161 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:23:58,590 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:24:34,505 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:24:35,205 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:26:06,996 [INFO] [wingman:184] - [WS] Received prompt from thread 561e5b30-5c12-4297-8d04-7573f318a124
+2026-05-15 11:26:07,019 [INFO] [wingman:28] - [memory_retriever] Retrieving context for: 'Damn, crazy heat! Since it summer i was planning a vacation,...'
+2026-05-15 11:26:07,019 [INFO] [wingman:46] - Starting tool run: memory_retrieval [TraceID=tr-a900f0d9]
+2026-05-15 11:26:07,075 [INFO] [wingman:99] - Successfully completed tool run: memory_retrieval in 56.08ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:07,100 [INFO] [wingman:39] - [planner] Compiling Execution Plan for: 'Damn, crazy heat! Since it summer i was planning a vacation,'
+2026-05-15 11:26:07,309 [INFO] [wingman:52] - [CredentialManager] Cipher registry loaded successfully with 1 version(s).
+2026-05-15 11:26:07,319 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.2, Streaming=True
+2026-05-15 11:26:11,367 [INFO] [wingman:102] - [planner] Compiled Plan successfully with 3 steps.
+2026-05-15 11:26:11,394 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:26:11,395 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:26:13,618 [INFO] [wingman:22] - [Router] Tool invocation directives active. Routing to: web_agent.
+2026-05-15 11:26:13,620 [INFO] [wingman:43] - [SubAgent] Waking web_agent...
+2026-05-15 11:26:13,620 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:26:15,725 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:15,726 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'best hill stations in India for summer altitude climate suitability current practical vacation 2026'
+2026-05-15 11:26:15,727 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:15,727 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'India hill stations summer average altitude best to beat the heat seasonal suitability'
+2026-05-15 11:26:15,727 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:15,727 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'current summer travel India hill stations cool weather May June altitude'
+2026-05-15 11:26:17,627 [INFO] [wingman:62] - [WebSearchTool] Found 5 active references.
+2026-05-15 11:26:17,627 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1901.91ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:17,783 [INFO] [wingman:62] - [WebSearchTool] Found 5 active references.
+2026-05-15 11:26:17,784 [INFO] [wingman:99] - Successfully completed tool run: web_search in 2057.30ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:18,080 [INFO] [wingman:62] - [WebSearchTool] Found 5 active references.
+2026-05-15 11:26:18,080 [INFO] [wingman:99] - Successfully completed tool run: web_search in 2353.18ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:20,798 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:20,800 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Shimla altitude official tourism India summer hill station'
+2026-05-15 11:26:20,800 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:20,801 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Mussoorie altitude official tourism India summer hill station'
+2026-05-15 11:26:20,801 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:20,801 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Ooty altitude official tourism India summer hill station'
+2026-05-15 11:26:20,801 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:20,802 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Munnar altitude official tourism India summer hill station'
+2026-05-15 11:26:20,802 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:20,802 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Darjeeling altitude official tourism India summer hill station'
+2026-05-15 11:26:22,134 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:22,135 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1334.31ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:22,157 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:22,158 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1356.23ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:22,344 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:22,345 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1544.19ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:22,517 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:22,518 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1719.80ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:24,964 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:24,965 [INFO] [wingman:99] - Successfully completed tool run: web_search in 4163.08ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:28,653 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:28,656 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Leh altitude official tourism best time to visit summer India'
+2026-05-15 11:26:28,656 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:28,656 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Spiti Valley altitude best time to visit summer official tourism India'
+2026-05-15 11:26:28,657 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:28,657 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Auli altitude official tourism best time summer India'
+2026-05-15 11:26:28,658 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:28,660 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Tawang altitude best time visit summer India'
+2026-05-15 11:26:28,661 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:28,661 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Shillong altitude best time to visit summer India'
+2026-05-15 11:26:30,047 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:30,047 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1390.50ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:30,051 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:30,051 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1394.00ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:30,222 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:30,223 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1570.32ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:30,242 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:30,243 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1586.40ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:30,244 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:30,245 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1583.89ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:33,100 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-a900f0d9]
+2026-05-15 11:26:33,100 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Auli altitude official tourism 2800 m'
+2026-05-15 11:26:34,630 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:26:34,630 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1530.52ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:42,326 [INFO] [wingman:110] - [SubAgent] web_agent finished task in 28709.01ms.
+2026-05-15 11:26:42,374 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:26:42,375 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:26:45,558 [INFO] [wingman:28] - [Router] Tool invocation directives active. Routing to: work_agent.
+2026-05-15 11:26:45,560 [INFO] [wingman:43] - [SubAgent] Waking work_agent...
+2026-05-15 11:26:45,562 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:26:47,747 [INFO] [wingman:46] - Starting tool run: weather_query [TraceID=tr-a900f0d9]
+2026-05-15 11:26:47,748 [INFO] [wingman:24] - [WeatherTool] Querying atmospheric state for: 'Leh, India' for 3 days.
+2026-05-15 11:26:47,748 [INFO] [wingman:40] - [WeatherService] Dispatching OpenWeatherMap evaluation for location='Leh, India'...
+2026-05-15 11:26:47,749 [INFO] [wingman:46] - Starting tool run: weather_query [TraceID=tr-a900f0d9]
+2026-05-15 11:26:47,749 [INFO] [wingman:24] - [WeatherTool] Querying atmospheric state for: 'Kaza, Spiti Valley, India' for 3 days.
+2026-05-15 11:26:47,749 [INFO] [wingman:40] - [WeatherService] Dispatching OpenWeatherMap evaluation for location='Kaza, Spiti Valley, India'...
+2026-05-15 11:26:47,749 [INFO] [wingman:46] - Starting tool run: weather_query [TraceID=tr-a900f0d9]
+2026-05-15 11:26:47,749 [INFO] [wingman:24] - [WeatherTool] Querying atmospheric state for: 'Auli, Uttarakhand, India' for 3 days.
+2026-05-15 11:26:47,749 [INFO] [wingman:40] - [WeatherService] Dispatching OpenWeatherMap evaluation for location='Auli, Uttarakhand, India'...
+2026-05-15 11:26:47,749 [INFO] [wingman:46] - Starting tool run: weather_query [TraceID=tr-a900f0d9]
+2026-05-15 11:26:47,749 [INFO] [wingman:24] - [WeatherTool] Querying atmospheric state for: 'Tawang, Arunachal Pradesh, India' for 3 days.
+2026-05-15 11:26:47,749 [INFO] [wingman:40] - [WeatherService] Dispatching OpenWeatherMap evaluation for location='Tawang, Arunachal Pradesh, India'...
+2026-05-15 11:26:47,750 [INFO] [wingman:46] - Starting tool run: weather_query [TraceID=tr-a900f0d9]
+2026-05-15 11:26:47,750 [INFO] [wingman:24] - [WeatherTool] Querying atmospheric state for: 'Shimla, Himachal Pradesh, India' for 3 days.
+2026-05-15 11:26:47,750 [INFO] [wingman:40] - [WeatherService] Dispatching OpenWeatherMap evaluation for location='Shimla, Himachal Pradesh, India'...
+2026-05-15 11:26:47,750 [INFO] [wingman:46] - Starting tool run: weather_query [TraceID=tr-a900f0d9]
+2026-05-15 11:26:47,750 [INFO] [wingman:24] - [WeatherTool] Querying atmospheric state for: 'Ooty, Tamil Nadu, India' for 3 days.
+2026-05-15 11:26:47,750 [INFO] [wingman:40] - [WeatherService] Dispatching OpenWeatherMap evaluation for location='Ooty, Tamil Nadu, India'...
+2026-05-15 11:26:50,402 [INFO] [wingman:56] - [WeatherTool] Forecast successfully compiled for 'Ooty'.
+2026-05-15 11:26:50,405 [INFO] [wingman:99] - Successfully completed tool run: weather_query in 2655.37ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:51,016 [INFO] [wingman:56] - [WeatherTool] Forecast successfully compiled for 'Shimla'.
+2026-05-15 11:26:51,018 [INFO] [wingman:99] - Successfully completed tool run: weather_query in 3268.52ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:54,168 [INFO] [wingman:56] - [WeatherTool] Forecast successfully compiled for 'Tawang'.
+2026-05-15 11:26:54,170 [INFO] [wingman:99] - Successfully completed tool run: weather_query in 6420.44ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:56,405 [INFO] [wingman:56] - [WeatherTool] Forecast successfully compiled for 'Kaza'.
+2026-05-15 11:26:56,407 [INFO] [wingman:99] - Successfully completed tool run: weather_query in 8658.34ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:26:59,946 [INFO] [wingman:56] - [WeatherTool] Forecast successfully compiled for 'Leh'.
+2026-05-15 11:26:59,948 [INFO] [wingman:99] - Successfully completed tool run: weather_query in 12200.93ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:27:02,755 [INFO] [wingman:56] - [WeatherTool] Forecast successfully compiled for 'Auli'.
+2026-05-15 11:27:02,758 [INFO] [wingman:99] - Successfully completed tool run: weather_query in 15008.72ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:27:07,473 [INFO] [wingman:110] - [SubAgent] work_agent finished task in 21913.10ms.
+2026-05-15 11:27:07,503 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:27:07,504 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:27:10,761 [INFO] [wingman:39] - [Router] Tool directives satisfied. Transferring control to: reflection node.
+2026-05-15 11:27:10,762 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.1, Streaming=True
+2026-05-15 11:27:10,779 [INFO] [wingman:66] - [reflection] Auditing system execution performance...
+2026-05-15 11:27:14,893 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.0, Streaming=True
+2026-05-15 11:27:14,894 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:27:17,076 [INFO] [wingman:121] - [reflection] Memory PASSED rigorous verification. Staged for commit.
+2026-05-15 11:27:17,076 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:27:18,554 [WARNING] [wingman:123] - [reflection] Memory BLOCKED by Knowledge Boundary Layer: Speculative/Ephemeral class 'Context' excluded from Neo4j.
+2026-05-15 11:27:18,554 [INFO] [wingman:130] - [reflection] Persisting 1 fully-audited semantic facts with active provenance tracking.
+2026-05-15 11:27:18,893 [INFO] [wingman:151] - [reflection] Hardened memory archival transaction succeeded.
+2026-05-15 11:29:25,437 [INFO] [wingman:184] - [WS] Received prompt from thread 561e5b30-5c12-4297-8d04-7573f318a124
+2026-05-15 11:29:25,446 [INFO] [wingman:28] - [memory_retriever] Retrieving context for: 'Its a trip with family. Can you find out good hotels in leh ...'
+2026-05-15 11:29:25,446 [INFO] [wingman:46] - Starting tool run: memory_retrieval [TraceID=tr-76120c04]
+2026-05-15 11:29:25,447 [INFO] [wingman:99] - Successfully completed tool run: memory_retrieval in 0.56ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:25,451 [INFO] [wingman:39] - [planner] Compiling Execution Plan for: 'Its a trip with family. Can you find out good hotels in leh '
+2026-05-15 11:29:25,844 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.2, Streaming=True
+2026-05-15 11:29:31,314 [INFO] [wingman:102] - [planner] Compiled Plan successfully with 4 steps.
+2026-05-15 11:29:31,327 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:29:31,327 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:29:33,208 [INFO] [wingman:22] - [Router] Tool invocation directives active. Routing to: web_agent.
+2026-05-15 11:29:33,209 [INFO] [wingman:43] - [SubAgent] Waking web_agent...
+2026-05-15 11:29:33,210 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:29:34,795 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-76120c04]
+2026-05-15 11:29:34,796 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'current family-friendly well-rated hotels in Leh Ladakh Leh family suitable reviews location comfort 2025'
+2026-05-15 11:29:34,797 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-76120c04]
+2026-05-15 11:29:34,797 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'best family hotels in Leh Ladakh near Leh town highly rated reviews 2025'
+2026-05-15 11:29:37,565 [INFO] [wingman:62] - [WebSearchTool] Found 5 active references.
+2026-05-15 11:29:37,566 [INFO] [wingman:99] - Successfully completed tool run: web_search in 2768.82ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:37,862 [INFO] [wingman:62] - [WebSearchTool] Found 5 active references.
+2026-05-15 11:29:37,863 [INFO] [wingman:99] - Successfully completed tool run: web_search in 3067.70ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:40,012 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-76120c04]
+2026-05-15 11:29:40,014 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'The Grand Dragon Ladakh family reviews location Leh city current 2025'
+2026-05-15 11:29:40,014 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-76120c04]
+2026-05-15 11:29:40,014 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Hotel The Ladakh Avenue Leh reviews family location current 2025'
+2026-05-15 11:29:40,014 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-76120c04]
+2026-05-15 11:29:40,014 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Hotel Malik Residency Leh reviews family location current 2025'
+2026-05-15 11:29:40,015 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-76120c04]
+2026-05-15 11:29:40,015 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Ladakh Sarai Resort Leh family reviews location current 2025'
+2026-05-15 11:29:40,015 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-76120c04]
+2026-05-15 11:29:40,015 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Riwang Residency Leh family reviews location current 2025'
+2026-05-15 11:29:41,462 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:29:41,462 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1449.98ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:41,751 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:29:41,751 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1736.04ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:41,777 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:29:41,778 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1763.47ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:42,337 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:29:42,337 [INFO] [wingman:99] - Successfully completed tool run: web_search in 2323.45ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:42,388 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:29:42,389 [INFO] [wingman:99] - Successfully completed tool run: web_search in 2373.82ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:44,011 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-76120c04]
+2026-05-15 11:29:44,011 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'The Indus Valley Leh reviews family location current 2025'
+2026-05-15 11:29:44,012 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-76120c04]
+2026-05-15 11:29:44,013 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Hotel Zen Ladakh reviews family location current 2025 Leh'
+2026-05-15 11:29:44,013 [INFO] [wingman:46] - Starting tool run: web_search [TraceID=tr-76120c04]
+2026-05-15 11:29:44,014 [INFO] [wingman:33] - [WebSearchTool] Dispatching live search query across Tavily indexed web: 'Ladakh Residency Leh family reviews location current 2025'
+2026-05-15 11:29:45,802 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:29:45,802 [INFO] [wingman:99] - Successfully completed tool run: web_search in 1788.72ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:46,224 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:29:46,224 [INFO] [wingman:99] - Successfully completed tool run: web_search in 2212.68ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:49,459 [INFO] [wingman:62] - [WebSearchTool] Found 3 active references.
+2026-05-15 11:29:49,460 [INFO] [wingman:99] - Successfully completed tool run: web_search in 5447.83ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:29:57,406 [INFO] [wingman:110] - [SubAgent] web_agent finished task in 24199.70ms.
+2026-05-15 11:29:57,434 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:29:57,435 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:30:02,688 [INFO] [wingman:39] - [Router] Tool directives satisfied. Transferring control to: reflection node.
+2026-05-15 11:30:02,689 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.1, Streaming=True
+2026-05-15 11:30:02,722 [INFO] [wingman:66] - [reflection] Auditing system execution performance...
+2026-05-15 11:30:06,866 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.0, Streaming=True
+2026-05-15 11:30:06,867 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:30:08,504 [INFO] [wingman:121] - [reflection] Memory PASSED rigorous verification. Staged for commit.
+2026-05-15 11:30:08,504 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:30:10,312 [WARNING] [wingman:123] - [reflection] Memory BLOCKED by Knowledge Boundary Layer: Speculative/Ephemeral class 'Context' excluded from Neo4j.
+2026-05-15 11:30:10,312 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:30:12,000 [INFO] [wingman:121] - [reflection] Memory PASSED rigorous verification. Staged for commit.
+2026-05-15 11:30:12,000 [INFO] [wingman:130] - [reflection] Persisting 2 fully-audited semantic facts with active provenance tracking.
+2026-05-15 11:30:12,654 [INFO] [wingman:151] - [reflection] Hardened memory archival transaction succeeded.
+2026-05-15 11:30:19,029 [INFO] [wingman:184] - [WS] Received prompt from thread 561e5b30-5c12-4297-8d04-7573f318a124
+2026-05-15 11:30:19,036 [INFO] [wingman:28] - [memory_retriever] Retrieving context for: 'Yes create the sheet...'
+2026-05-15 11:30:19,036 [INFO] [wingman:46] - Starting tool run: memory_retrieval [TraceID=tr-a6b79915]
+2026-05-15 11:30:19,036 [INFO] [wingman:99] - Successfully completed tool run: memory_retrieval in 0.43ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:30:19,040 [INFO] [wingman:39] - [planner] Compiling Execution Plan for: 'Yes create the sheet'
+2026-05-15 11:30:22,044 [WARNING] [wingman:114] - [Cap-Discovery] Weather ping failed: 
+2026-05-15 11:30:22,051 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.2, Streaming=True
+2026-05-15 11:30:24,614 [INFO] [wingman:102] - [planner] Compiled Plan successfully with 1 steps.
+2026-05-15 11:30:24,619 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:30:24,620 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:30:27,208 [INFO] [wingman:28] - [Router] Tool invocation directives active. Routing to: work_agent.
+2026-05-15 11:30:27,210 [INFO] [wingman:43] - [SubAgent] Waking work_agent...
+2026-05-15 11:30:27,211 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:30:29,361 [INFO] [wingman:110] - [SubAgent] work_agent finished task in 2151.86ms.
+2026-05-15 11:30:29,370 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:30:29,371 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:30:30,846 [INFO] [wingman:28] - [Router] Tool invocation directives active. Routing to: work_agent.
+2026-05-15 11:30:30,847 [INFO] [wingman:43] - [SubAgent] Waking work_agent...
+2026-05-15 11:30:30,848 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:30:33,211 [INFO] [wingman:110] - [SubAgent] work_agent finished task in 2364.02ms.
+2026-05-15 11:30:33,244 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:30:33,245 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:30:39,261 [INFO] [wingman:28] - [Router] Tool invocation directives active. Routing to: work_agent.
+2026-05-15 11:30:39,262 [INFO] [wingman:43] - [SubAgent] Waking work_agent...
+2026-05-15 11:30:39,264 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:30:42,210 [INFO] [wingman:46] - Starting tool run: google_sheets_create [TraceID=tr-a6b79915]
+2026-05-15 11:30:42,211 [INFO] [wingman:25] - [SheetsTool] Prompting confirmation for spreadsheet creation: 'Leh Family Trip Plan'
+2026-05-15 11:30:42,211 [ERROR] [wingman:119] - Failed tool execution for google_sheets_create: (Interrupt(value={'tool': 'google_sheets_create', 'prompt': "Create spreadsheet titled 'Leh Family Trip Plan'?", 'data': {'title': 'Leh Family Trip Plan'}}, id='78065bad1cde2b0c8ac4d3f2f846d594'),)
+Traceback (most recent call last):
+  File "/app/backend/app/tools/base/interface.py", line 85, in run
+    raw_output = await self._execute(validated_args, context)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/backend/app/tools/google_sheets/tool.py", line 27, in _execute
+    decision = interrupt({
+               ^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/langgraph/types.py", line 917, in interrupt
+    raise GraphInterrupt(
+langgraph.errors.GraphInterrupt: (Interrupt(value={'tool': 'google_sheets_create', 'prompt': "Create spreadsheet titled 'Leh Family Trip Plan'?", 'data': {'title': 'Leh Family Trip Plan'}}, id='78065bad1cde2b0c8ac4d3f2f846d594'),)
+2026-05-15 11:30:43,479 [INFO] [wingman:110] - [SubAgent] work_agent finished task in 4216.29ms.
+2026-05-15 11:30:43,503 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:30:43,504 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:30:45,447 [INFO] [wingman:39] - [Router] Tool directives satisfied. Transferring control to: reflection node.
+2026-05-15 11:30:45,448 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.1, Streaming=True
+2026-05-15 11:30:45,471 [INFO] [wingman:66] - [reflection] Auditing system execution performance...
+2026-05-15 11:30:49,105 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.0, Streaming=True
+2026-05-15 11:30:49,106 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:30:50,451 [WARNING] [wingman:127] - [reflection] Memory REJECTED by anti-hallucination gate: The trace contains no explicit mention of the user's name being Anuj, and no directly inferable identifier supports that fact.
+2026-05-15 11:30:50,451 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:30:53,045 [WARNING] [wingman:123] - [reflection] Memory BLOCKED by Knowledge Boundary Layer: Speculative/Ephemeral class 'Context' excluded from Neo4j.
+2026-05-15 11:30:53,045 [INFO] [wingman:102] - [reflection] Routing memory candidate 'user' to anti-hallucination gateway...
+2026-05-15 11:30:54,542 [INFO] [wingman:121] - [reflection] Memory PASSED rigorous verification. Staged for commit.
+2026-05-15 11:30:54,542 [INFO] [wingman:102] - [reflection] Routing memory candidate 'workflow' to anti-hallucination gateway...
+2026-05-15 11:30:56,356 [WARNING] [wingman:123] - [reflection] Memory BLOCKED by Knowledge Boundary Layer: Speculative/Ephemeral class 'Context' excluded from Neo4j.
+2026-05-15 11:30:56,356 [INFO] [wingman:130] - [reflection] Persisting 1 fully-audited semantic facts with active provenance tracking.
+2026-05-15 11:30:56,922 [INFO] [wingman:151] - [reflection] Hardened memory archival transaction succeeded.
+2026-05-15 11:49:56,848 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:49:56,948 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:49:56,948 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:49:56,950 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:49:56,951 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:49:56,951 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:49:57,749 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:50:00,846 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:50:00,954 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:50:00,956 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:50:00,978 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:50:01,389 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:50:01,453 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:50:01,454 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:50:01,454 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:50:01,454 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:50:01,481 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:50:01,481 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:50:02,116 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:50:02,156 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:50:02,156 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:50:02,178 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:50:13,785 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:50:13,885 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:50:13,885 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:50:13,886 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:50:13,886 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:50:13,887 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:50:14,542 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:50:17,836 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:50:17,960 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:50:17,962 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:50:17,996 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:50:18,500 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:50:18,648 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:50:18,648 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:50:18,648 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:50:18,648 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:50:18,690 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:50:18,690 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:50:19,244 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:50:19,255 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:50:19,255 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:50:19,265 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:50:23,867 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:50:23,968 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:50:23,968 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:50:23,968 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:50:23,969 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:50:23,969 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:50:24,587 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:50:27,484 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:50:27,608 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:50:27,610 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:50:27,643 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:50:28,164 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:50:28,192 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:50:28,193 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:50:28,193 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:50:28,193 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:50:28,219 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:50:28,219 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:50:28,736 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:50:28,814 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:50:28,814 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:50:28,872 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:50:37,637 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:50:37,737 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:50:37,737 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:50:37,738 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:50:37,738 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:50:37,738 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:50:38,415 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:50:41,110 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:50:41,164 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:50:41,165 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:50:41,183 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:50:41,798 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:50:41,823 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:50:41,824 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:50:41,824 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:50:41,824 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:50:41,839 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:50:41,839 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:50:42,389 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:50:42,405 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:50:42,405 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:50:42,419 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:50:45,813 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:50:45,913 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:50:45,913 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:50:45,914 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:50:45,914 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:50:45,914 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:50:46,538 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:50:49,488 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:50:49,610 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:50:49,611 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:50:49,643 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:50:49,980 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:50:50,093 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:50:50,094 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:50:50,094 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:50:50,094 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:50:50,115 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:50:50,115 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:50:50,658 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:50:50,663 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:50:50,663 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:50:50,669 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:50:54,073 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:50:54,173 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:50:54,174 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:50:54,174 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:50:54,175 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:50:54,175 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:50:54,787 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:50:57,379 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:50:57,481 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:50:57,484 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:50:57,520 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:50:58,080 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:50:58,130 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:50:58,131 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:50:58,131 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:50:58,131 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:50:58,153 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:50:58,153 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:50:58,671 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:50:58,690 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:50:58,690 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:50:58,712 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:51:03,705 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:51:03,805 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:51:03,805 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:51:03,806 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:51:03,807 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:51:03,807 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:51:04,481 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:51:07,198 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:51:07,334 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:51:07,337 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:51:07,376 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:51:07,970 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:51:08,026 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:51:08,026 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:51:08,026 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:51:08,026 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:51:08,047 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:51:08,047 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:51:08,623 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:51:08,652 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:51:08,653 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:51:08,660 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:51:13,766 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:51:13,866 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:51:13,866 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:51:13,867 [INFO] [wingman:55] - [MongoDB] Connection terminated.
+2026-05-15 11:51:13,868 [INFO] [wingman:34] - [Neo4j] Driver pool closed.
+2026-05-15 11:51:13,868 [INFO] [wingman:72] - Resources released cleanly.
+2026-05-15 11:51:14,487 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:51:17,588 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:51:17,705 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:51:17,707 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:51:17,727 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:51:18,254 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:51:18,394 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:51:18,395 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:51:18,395 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:51:18,395 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:51:18,432 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:51:18,432 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:51:18,981 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:51:18,999 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:51:18,999 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:51:19,006 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:59:04,083 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:59:04,367 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:59:04,372 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:59:04,756 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:59:11,984 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:59:12,084 [INFO] [wingman:62] - Shutting down Wingman
+2026-05-15 11:59:12,084 [INFO] [wingman:83] - [EventBus] Background event dispatcher stopped.
+2026-05-15 11:59:17,897 [INFO] [wingman:28] - Logging setup complete with level: INFO
+2026-05-15 11:59:21,152 [INFO] [wingman:30] - [BudgetManager] Initialized limits: Soft=80000 | Hard=150000
+2026-05-15 11:59:21,265 [INFO] [wingman:22] - Scaffolding advanced Wingman Cognitive Runtime topology...
+2026-05-15 11:59:21,267 [INFO] [wingman:68] - [Graph] Initializing durable MongoDBSaver cluster checkpointer...
+2026-05-15 11:59:21,307 [INFO] [wingman:82] - Compiling Cognitive Graph topology with durable checkpointer...
+2026-05-15 11:59:21,905 [INFO] [wingman:15] - [Doc-Processor] TikToken tokenizer loaded successfully.
+2026-05-15 11:59:21,936 [INFO] [wingman:142] - FastAPI routes mapped successfully.
+2026-05-15 11:59:21,936 [INFO] [wingman:30] - Starting up Wingman v0.1.0
+2026-05-15 11:59:21,936 [INFO] [wingman:36] - Initializing persistent data clients...
+2026-05-15 11:59:21,936 [INFO] [wingman:19] - [MongoDB] Connecting to node: mongodb://root:example@mongodb:27017/
+2026-05-15 11:59:21,964 [INFO] [wingman:49] - [MongoDB] Collection indexes verified and initialized successfully.
+2026-05-15 11:59:21,964 [INFO] [wingman:17] - [Neo4j] Initializing connection pool to uri: neo4j+s://d173dcc1.databases.neo4j.io
+2026-05-15 11:59:22,627 [INFO] [wingman:25] - [Neo4j] Authenticated & Connected Successfully.
+2026-05-15 11:59:22,644 [INFO] [wingman:72] - [EventBus] Background event dispatcher initialized.
+2026-05-15 11:59:22,644 [INFO] [wingman:56] - Data storage and Event Bus instances initialized securely.
+2026-05-15 11:59:25,663 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:59:30,914 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 11:59:31,199 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 11:59:43,055 [INFO] [wingman:184] - [WS] Received prompt from thread 561e5b30-5c12-4297-8d04-7573f318a124
+2026-05-15 11:59:43,089 [INFO] [wingman:28] - [memory_retriever] Retrieving context for: 'Perfect can you create it?...'
+2026-05-15 11:59:43,089 [INFO] [wingman:62] - Starting tool run: memory_retrieval [TraceID=tr-624027a2]
+2026-05-15 11:59:43,161 [INFO] [wingman:115] - Successfully completed tool run: memory_retrieval in 72.50ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 11:59:43,198 [INFO] [wingman:39] - [planner] Compiling Execution Plan for: 'Perfect can you create it?'
+2026-05-15 11:59:46,302 [WARNING] [wingman:114] - [Cap-Discovery] Weather ping failed: 
+2026-05-15 11:59:46,305 [INFO] [wingman:52] - [CredentialManager] Cipher registry loaded successfully with 1 version(s).
+2026-05-15 11:59:46,335 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.2, Streaming=True
+2026-05-15 11:59:49,955 [INFO] [wingman:102] - [planner] Compiled Plan successfully with 1 steps.
+2026-05-15 11:59:49,985 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:59:49,986 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 11:59:54,264 [INFO] [wingman:28] - [Router] Tool invocation directives active. Routing to: work_agent.
+2026-05-15 11:59:54,265 [INFO] [wingman:43] - [SubAgent] Waking work_agent...
+2026-05-15 11:59:54,266 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 11:59:59,612 [INFO] [wingman:62] - Starting tool run: google_sheets_create [TraceID=tr-624027a2]
+2026-05-15 11:59:59,613 [INFO] [wingman:24] - [SheetsTool] Prompting confirmation for spreadsheet creation: 'Leh Family Trip Plan'
+2026-05-15 12:00:10,078 [INFO] [wingman:287] - [WS] Resuming thread 561e5b30-5c12-4297-8d04-7573f318a124 via web socket command.
+2026-05-15 12:00:10,085 [INFO] [wingman:43] - [SubAgent] Waking work_agent...
+2026-05-15 12:00:10,085 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 12:00:10,115 [INFO] [wingman:62] - Starting tool run: google_sheets_create [TraceID=tr-624027a2]
+2026-05-15 12:00:10,116 [INFO] [wingman:24] - [SheetsTool] Prompting confirmation for spreadsheet creation: 'Leh Family Trip Plan'
+2026-05-15 12:00:10,124 [INFO] [wingman:126] - [GoogleOAuth] Credential token expired. Activating auto-refresh protocol...
+2026-05-15 12:00:10,401 [INFO] [wingman:119] - [CredentialManager] Securely stored credentials for 'google' [User=global].
+2026-05-15 12:00:10,401 [INFO] [wingman:142] - [GoogleOAuth] Auto-refresh successful. Stored new access tokens.
+2026-05-15 12:00:10,402 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:00:10,406 [INFO] [wingman:31] - [SheetsService] Generating new spreadsheet: 'Leh Family Trip Plan'
+2026-05-15 12:00:11,760 [INFO] [wingman:115] - Successfully completed tool run: google_sheets_create in 1644.19ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 12:00:15,416 [INFO] [wingman:62] - Starting tool run: google_sheets_update [TraceID=tr-624027a2]
+2026-05-15 12:00:15,417 [INFO] [wingman:62] - Starting tool run: google_sheets_update [TraceID=tr-624027a2]
+2026-05-15 12:04:16,312 [INFO] [wingman:184] - [WS] Received prompt from thread 561e5b30-5c12-4297-8d04-7573f318a124
+2026-05-15 12:04:16,328 [INFO] [wingman:28] - [memory_retriever] Retrieving context for: 'Can you send an email to anujm0707@gmail.com to confirm avai...'
+2026-05-15 12:04:16,329 [INFO] [wingman:62] - Starting tool run: memory_retrieval [TraceID=tr-53271c09]
+2026-05-15 12:04:16,330 [INFO] [wingman:115] - Successfully completed tool run: memory_retrieval in 1.77ms [Authenticity=AuthenticityLevel.REAL]
+2026-05-15 12:04:16,334 [INFO] [wingman:39] - [planner] Compiling Execution Plan for: 'Can you send an email to anujm0707@gmail.com to confirm avai'
+2026-05-15 12:04:17,742 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.2, Streaming=True
+2026-05-15 12:04:22,013 [INFO] [wingman:102] - [planner] Compiled Plan successfully with 2 steps.
+2026-05-15 12:04:22,032 [INFO] [wingman:60] - Initializing LLM layer: Model=gpt-5.4-mini, ReasoningEffort=low, Temperature=0.7, Streaming=True
+2026-05-15 12:04:22,033 [INFO] [wingman:80] - [orchestrator] Invocating LLM generation [Model=gpt-5.4-mini].
+2026-05-15 12:04:22,455 [ERROR] [wingman:117] - [orchestrator] LLM invocation collapsed: Error code: 400 - {'error': {'message': 'No tool output found for function call call_1yQ188jprpGr82rySk96NDAB.', 'type': 'invalid_request_error', 'param': 'input', 'code': None}}
+Traceback (most recent call last):
+  File "/app/backend/app/graphs/nodes/orchestrator.py", line 90, in orchestrator_node
+    async for chunk in runnable_llm.astream(full_messages):
+  File "/usr/local/lib/python3.11/site-packages/langchain_core/runnables/base.py", line 6071, in astream
+    async for item in self.bound.astream(
+  File "/usr/local/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 907, in astream
+    async for chunk in self._astream(
+  File "/usr/local/lib/python3.11/site-packages/langchain_openai/chat_models/base.py", line 3358, in _astream
+    async for chunk in super()._astream_responses(*args, **kwargs):
+  File "/usr/local/lib/python3.11/site-packages/langchain_openai/chat_models/base.py", line 1514, in _astream_responses
+    _handle_openai_bad_request(e)
+  File "/usr/local/lib/python3.11/site-packages/langchain_openai/chat_models/base.py", line 1471, in _astream_responses
+    context_manager = await self.root_async_client.responses.create(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/openai/resources/responses/responses.py", line 2622, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/openai/_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/openai/_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'No tool output found for function call call_1yQ188jprpGr82rySk96NDAB.', 'type': 'invalid_request_error', 'param': 'input', 'code': None}}
+2026-05-15 12:04:22,475 [ERROR] [wingman:312] - [WS] Channel transaction failed: Error code: 400 - {'error': {'message': 'No tool output found for function call call_1yQ188jprpGr82rySk96NDAB.', 'type': 'invalid_request_error', 'param': 'input', 'code': None}}
+Traceback (most recent call last):
+  File "/app/backend/app/api/v1/chat.py", line 229, in chat_websocket
+    async for event in wingman_app.astream(graph_state, config=config, stream_mode="values"):
+  File "/usr/local/lib/python3.11/site-packages/langgraph/pregel/main.py", line 3407, in astream
+    async for _ in runner.atick(
+  File "/usr/local/lib/python3.11/site-packages/langgraph/pregel/_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "/usr/local/lib/python3.11/site-packages/langgraph/pregel/_retry.py", line 706, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/langgraph/_internal/_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/langgraph/_internal/_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/backend/app/graphs/nodes/orchestrator.py", line 118, in orchestrator_node
+    raise e
+  File "/app/backend/app/graphs/nodes/orchestrator.py", line 90, in orchestrator_node
+    async for chunk in runnable_llm.astream(full_messages):
+  File "/usr/local/lib/python3.11/site-packages/langchain_core/runnables/base.py", line 6071, in astream
+    async for item in self.bound.astream(
+  File "/usr/local/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 907, in astream
+    async for chunk in self._astream(
+  File "/usr/local/lib/python3.11/site-packages/langchain_openai/chat_models/base.py", line 3358, in _astream
+    async for chunk in super()._astream_responses(*args, **kwargs):
+  File "/usr/local/lib/python3.11/site-packages/langchain_openai/chat_models/base.py", line 1514, in _astream_responses
+    _handle_openai_bad_request(e)
+  File "/usr/local/lib/python3.11/site-packages/langchain_openai/chat_models/base.py", line 1471, in _astream_responses
+    context_manager = await self.root_async_client.responses.create(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/openai/resources/responses/responses.py", line 2622, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/openai/_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/openai/_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'No tool output found for function call call_1yQ188jprpGr82rySk96NDAB.', 'type': 'invalid_request_error', 'param': 'input', 'code': None}}
+During task with name 'orchestrator' and id 'a84da8a9-94fd-8d01-0e68-6991b2df6d55'
+2026-05-15 12:04:25,498 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 12:05:32,296 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 12:05:32,559 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 12:05:32,569 [INFO] [wingman:310] - [WS] Core Chat Channel Closed.
+2026-05-15 12:05:33,082 [INFO] [wingman:161] - [WS] Core Chat Channel Connected.
+2026-05-15 12:06:05,358 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'l'
+2026-05-15 12:06:05,363 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:05,369 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'l'
+2026-05-15 12:06:06,014 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 12:06:06,015 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:06,026 [INFO] [wingman:135] - [CalendarService] Performing dual-layered search for keyword: 'l'
+2026-05-15 12:06:06,027 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'lh'
+2026-05-15 12:06:06,033 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:06,035 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'lh'
+2026-05-15 12:06:06,619 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 12:06:06,620 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:06,621 [INFO] [wingman:135] - [CalendarService] Performing dual-layered search for keyword: 'lh'
+2026-05-15 12:06:06,773 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'l'
+2026-05-15 12:06:06,776 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:06,777 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'l'
+2026-05-15 12:06:07,410 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 12:06:07,415 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:07,415 [INFO] [wingman:135] - [CalendarService] Performing dual-layered search for keyword: 'l'
+2026-05-15 12:06:07,416 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'leh'
+2026-05-15 12:06:07,422 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:07,423 [INFO] [wingman:135] - [CalendarService] Performing dual-layered search for keyword: 'leh'
+2026-05-15 12:06:07,428 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:07,429 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'leh'
+2026-05-15 12:06:07,991 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 12:06:09,825 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'le'
+2026-05-15 12:06:09,828 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:09,829 [INFO] [wingman:135] - [CalendarService] Performing dual-layered search for keyword: 'le'
+2026-05-15 12:06:09,834 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:09,835 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'le'
+2026-05-15 12:06:10,387 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 12:06:10,500 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'l'
+2026-05-15 12:06:10,502 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:10,506 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'l'
+2026-05-15 12:06:11,043 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 12:06:11,045 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:11,048 [INFO] [wingman:135] - [CalendarService] Performing dual-layered search for keyword: 'l'
+2026-05-15 12:06:19,868 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'f'
+2026-05-15 12:06:19,871 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:19,872 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'f'
+2026-05-15 12:06:20,470 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 12:06:20,471 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:20,473 [INFO] [wingman:135] - [CalendarService] Performing dual-layered search for keyword: 'f'
+2026-05-15 12:06:20,508 [INFO] [wingman:17] - [API-Search] Encountered global search lookup request for: 'f1'
+2026-05-15 12:06:20,510 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:20,511 [INFO] [wingman:160] - [DocsService] Executing Drive search with query: mimeType = 'application/vnd.google-apps.document' and trashed = false and name contains 'f1'
+2026-05-15 12:06:21,069 [INFO] [wingman:170] - [DocsService] Search retrieved 0 matching documents.
+2026-05-15 12:06:21,070 [INFO] [googleapiclient.discovery_cache:49] - file_cache is only supported with oauth2client<4.0.0
+2026-05-15 12:06:21,071 [INFO] [wingman:135] - [CalendarService] Performing dual-layered search for keyword: 'f1'
+2026-05-15 12:06:34,757 [INFO] [wingman:14] - [API-Tools] Servicing request for full tool capabilities registry.
