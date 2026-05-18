@@ -3,13 +3,13 @@
 </p>
 
 # Wingman
-> **The ultimate personalized AI operating system.** Empowered by deep long-term episodic and semantic memory, autonomous tool orchestration, distributed background tasks, and a visually stunning, minimalist command center.
+> **The ultimate personalized AI assistant.** Empowered by deep long-term episodic and semantic memory, autonomous tool orchestration, distributed background tasks, and a visually stunning, minimalist command center.
 
 ---
 
 ## 🌟 System Architecture Overview
 
-Wingman represents the next-generation of agentic OS design, utilizing a **multi-agent orchestration topology** governed by a state-driven cognitive loop. It natively decouples real-time runtime transactions from heavy scheduling computations and provides transparent debugging telemetry via continuous web socket channels.
+Wingman represents a next-generation agentic design, utilizing a **multi-agent orchestration topology** governed by a state-driven cognitive loop. It natively decouples real-time runtime transactions from heavy scheduling computations and provides transparent debugging telemetry via continuous web socket channels.
 
 ### 📂 Monorepo Tree Structure
 ```txt
@@ -23,7 +23,7 @@ wingman/
 │   │   │   ├── execution/# Telemetry helper injects and graph flow controllers
 │   │   │   └── nodes/    # Core cognitive modules (Planner, Executor, Reflection)
 │   │   ├── tools/        # 3rd party action clients (Google, Slack, RAG, YouTube)
-│   │   ├── memory/       # Core drivers (MongoDB, Neo4j, and Pinecone Vector)
+│   │   ├── memory/       # Core drivers (MongoDB, Neo4j, and Chroma Vector)
 │   │   ├── services/     # Domain controllers (Auth, Document Extraction, LLM Clients)
 │   │   ├── worker/       # Arq Background job scheduler & nocturnal triggers
 │   │   ├── core/         # Configuration management and logger modules
@@ -52,22 +52,34 @@ wingman/
 ### 1. Multi-Tier Cognitive Memory Fabric
 To provide a human-like persistence model, Wingman utilizes three independent storage engines working in orchestration:
 *   **💾 Raw Archive Memory (MongoDB):** Asynchronous chronological logging storing every prompt, full assistant payload, and execution metadata (actively recording generating `model` and `reasoning_effort` per interaction).
-*   **🕸️ Semantic Fact Memory (Neo4j Aura):** Graph database preserving extracted episodic nodes, entity relationships, and abstract concepts. Powering long-term contextual synthesis across weeks of chats.
-*   **🔍 High-Density Vector DB (Pinecone):** Stores dense embeddings generated using **llama-text-embed-v2**. Manages the ingestion pipeline that tokenizes user PDFs and text docs into **300-token chunks with 60-character overlap**, retrieving Top-K contexts via a specialized **DocumentRAGTool**.
+*   **🕸️ Semantic Fact Memory (Neo4j on Docker):** Graph database preserving extracted episodic nodes, entity relationships, and abstract concepts. Powering long-term contextual synthesis across weeks of chats.
+*   **🔍 High-Density Vector DB (ChromaDB on Docker):** Stores dense embeddings generated using the **BAAI/bge-small-en-v1.5** model. Manages the ingestion pipeline that tokenizes user PDFs and text docs into **300-token chunks with 60-character overlap**, retrieving Top-K contexts via a specialized **DocumentRAGTool**.
 
 ### 2. The LangGraph Cognitive Loop
-All AI execution is governed by a cyclic LangGraph flow that moves beyond traditional linear LLM prompting:
+All AI execution is governed by a cyclic LangGraph flow that routes task flows dynamically through our specialized agents:
 ```mermaid
 graph TD
-    A[User Prompt] --> B[Planner Node]
-    B -->|Analyzes Intent & Tools| C[Executor Node]
-    C -->|Executes Actions / RAG| D[Reflection Node]
-    D -->|Self-Critique Good?| E{Quality Check}
-    E -->|Needs Refinement| B
-    E -->|Passes Validation| F[Formulate Response]
-    F -->|Streams Token Chunks| G[User Interface]
-    C -.->|High Impact Tool| H[HITL Suspend Gate]
-    H -.->|Approve/Edit| C
+    START([START]) --> MR[Memory Retriever Node]
+    MR --> P[Planner Node]
+    P --> O[Orchestrator Node]
+    
+    O -->|Conditional Routing| WA[Web Agent ReAct Loop]
+    O -->|Conditional Routing| CA[Comm Agent ReAct Loop]
+    O -->|Conditional Routing| WK[Work Agent ReAct Loop]
+    O -->|Conditional Routing| RA[RAG Agent ReAct Loop]
+    O -->|Conditional Routing| TE[Tool Executor Fallback]
+    O -->|Plan Execution Complete| R[Reflection Node]
+    
+    WA --> O
+    CA --> O
+    WK --> O
+    RA --> O
+    TE --> O
+    
+    O -.->|Dynamic HITL Clearance| H[Interrupt Suspend Gate]
+    H -.->|User Approve/Resume| O
+    
+    R --> END([END])
 ```
 
 ### 3. Real-Time Dynamic Controls
@@ -76,9 +88,9 @@ The backend allows the frontend to dynamically inject runtime configuration over
 *   **Reasoning Effort Configuration:** Hot-swappable parameter (`Low`, `Medium`, `High`) driving structural depth checks within individual model inference passes.
 
 ### 4. Distributed Async Worker Runtime
-Nightly system maintenance is decoupled from user API request threads to avoid performance degradation:
+Periodic system maintenance is decoupled from user API request threads to avoid performance degradation:
 *   **System:** Handled by an **Arq** (Redis-backed Async Job Queue) background runner daemon.
-*   **Cron Operations:** Triggers at 03:00 AM daily to synthesize the day's MongoDB conversations, inject new connections into Neo4j, and decay expired vector states.
+*   **Cron Operations:** Triggers every 4 hours to synthesize past MongoDB conversations, extract new episodic semantic connections to sync with Neo4j, and decay expired vector states.
 
 ### 5. Multi-Agent Orchestrator Model (CEO & Department Heads)
 Wingman's execution engine is built around a centralized **Orchestrator Node (The CEO)** delegating specific tasks to a suite of highly-specialized **Sub-Agents (Department Heads)**. Each Sub-Agent runs a localized **ReAct (Reasoning and Action) loop** with custom prompting, local LLM configurations, and isolated atomic tool access:
@@ -101,7 +113,7 @@ To prevent redundant API side-effects when the graph gets suspended for a **Huma
 *   **Orchestration:** LangGraph & LangChain
 *   **Scheduling Engine:** Arq & Redis
 *   **Parsers:** `pypdf`, `python-docx`, and `tiktoken` (standardized on `cl100k_base`)
-*   **Database Drivers:** Motor (Async Mongo), Neo4j-Python-Driver, Pinecone-Client
+*   **Database Drivers:** Motor (Async Mongo), Neo4j-Python-Driver, ChromaDB-Client
 
 ### Frontend Tier
 *   **Foundation:** React 18 + Vite + TypeScript
@@ -116,7 +128,7 @@ Wingman's orchestration environment is fully modularized using Docker Compose. T
     *   **Functions:** Coordinates cognitive LangGraph execution, services all RESTful endpoints, handles bidirectional real-time WebSocket communication, parses dynamic environment overrides, and emits telemetry stream sequences. It features live hot-reloading by mounting the local backend folder as a Docker volume.
 2.  **⚙️ Async Daemon Worker (`wingman-worker`):**
     *   **Role:** Redis-backed Arq scheduler and background worker.
-    *   **Functions:** Offloads computationally intensive processes (such as PDF/document ingestion and deep vector embedding parsing) from user request threads. Natively runs scheduled noctural cron jobs (at 03:00 AM) to synthesize past messages and consolidate memory states without degrading server latency.
+    *   **Functions:** Offloads computationally intensive processes (such as PDF/document ingestion and deep vector embedding parsing) from user request threads. Natively runs scheduled periodic cron jobs (every 4 hours) to synthesize past messages, extract entities, and consolidate memory states without degrading server latency.
 3.  **⚛️ React Frontend Client (`wingman-frontend`):**
     *   **Role:** Vite development and production delivery server.
     *   **Functions:** Bundles and renders the visually stunning space-mono black-and-white visual interface. Maintains connection states via Zustand stores, handles dynamic asset loading, and captures localized user metrics.
@@ -138,7 +150,7 @@ Wingman's orchestration environment is fully modularized using Docker Compose. T
 ## 🏁 Quickstart Guide
 
 ### 🐳 Method 1: Run Stack via Docker Compose (Recommended)
-Clone the repository, boot all 5 micro-containers simultaneously (FastAPI, React Frontend, MongoDB, Neo4j, and Redis), and configure all credentials seamlessly directly from the UI onboarding setup assistant (no manual `.env` file editing required!):
+Clone the repository, boot all 7 containers simultaneously (FastAPI, React Frontend, MongoDB, Neo4j, Redis, ChromaDB, and Arq Worker), and configure all credentials seamlessly directly from the UI onboarding setup assistant (no manual `.env` file editing required!):
 ```bash
 # 1. Clone and enter repository
 git clone https://github.com/PRIME-07/Wingman.git
@@ -199,7 +211,7 @@ npm run dev
 
 ### Restful Core Actions
 *   `GET /health`: Microservice reachability check.
-*   `POST /api/v1/documents/upload`: Stream file binaries into Pinecone embeddings.
+*   `POST /api/v1/documents/upload`: Stream file binaries into ChromaDB embeddings.
 *   `GET /api/v1/documents`: Retrieve registry log of uploaded user knowledge sources.
 *   `DELETE /api/v1/documents/{doc_id}`: Erases vector indices permanently.
 
@@ -207,13 +219,13 @@ npm run dev
 
 ## 🔧 Detailed Setup Guide
 
-### 🌐 Zero-Config Onboarding (Easiest & Recommended)
+### 🌐 Zero-Config Onboarding (Easiest)
 Wingman features a complete **Zero-Config Onboarding workflow** built directly into the user interface. You don't have to deal with terminal editors, `.env` file configurations, or container restarts! 
 
 #### 1. First-Time Setup Assistant Wizard
 When you boot Wingman and open the interface for the first time, you will be welcomed by an interactive **Setup Assistant**. This wizard walks you through setting up all necessary environment variables:
 *   **LLM Engine Credentials:** Enter your OpenAI API key or other model keys.
-*   **Memory & Vector Databases:** Easily input your Pinecone Environment, API Key, and Neo4j Aura database credentials to enable persistent long-term agent memory.
+*   **Memory & Vector Databases:** Easily configure your local database properties to enable persistent long-term episodic memory, graph storage, and vector retrieval.
 *   **Integrations & Tooling:** Enter API credentials for search engines, maps, weather feeds, and YouTube to power the agent's real-time tools.
 
 #### 2. Reconfiguring or Accessing Settings Later
@@ -248,23 +260,18 @@ Need to change an API key, add a new integration, or verify your connection stat
 4. Go to **Install App** and click **Install to Workspace**.
 5. Copy the **Bot User OAuth Token** (starts with `xoxb-`) into Wingman.
 
-### Pinecone Memory
-1. Sign up at [Pinecone.io](https://www.pinecone.io/).
-2. Click **Create Index**:
-   - Name: `wingman-index` (or your choice).
-   - Dimension: `1024` (Required for **llama-text-embed-v2**).
-   - Metric: `cosine`.
-3. Go to **API Keys** and create a new key.
-4. Copy the **API Key**, **Index Name**, and **Environment** into Wingman.
+### ChromaDB Vector Memory (Local)
+ChromaDB is executed entirely as a local microservice (`wingman-chromadb`) within the Docker Compose network. 
+*   **No API Keys Required:** Unlike external vector databases, local ChromaDB does not require subscription fees or cloud configurations.
+*   **Embedding Model:** Automatically processes document tokenization and uploads using the premium, localized open-source **BAAI/bge-small-en-v1.5** model.
 
-### Neo4j Aura
-1. Sign up at [Neo4j Aura](https://neo4j.com/cloud/aura/).
-2. Create a new **AuraDB Free** instance.
-3. Download the `credentials.json` file provided during creation.
-4. Copy the **Connection URI**, **Username**, and **Password** into Wingman.
+### Neo4j Graph Memory (Local)
+The semantic graph database is run locally via the `wingman-neo4j` Docker container.
+*   **Default Credentials:** Spuns up pre-configured with username `neo4j` and password `password`.
+*   **Local Management Console:** You can inspect your episodic nodes, entities, and relationship facts live by navigating to [http://localhost:7474](http://localhost:7474).
 
 ### LLM Engine Setup
 1. Go to [OpenAI API Keys](https://platform.openai.com/api-keys).
 2. Create a new secret key.
-3. **Disclaimer:** Currently, Wingman is optimized for **OpenAI only**. Ensure your key has credits and access to `gpt-4o` or `gpt-4-turbo`.
+3. **Disclaimer:** Currently, Wingman is compatible with **OpenAI only**. Please ensure your key has credits and access to `gpt-4o-mini` and `gpt-5.4-mini`.
 4. Paste the key into the Engine tab in Wingman.
