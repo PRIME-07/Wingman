@@ -23,8 +23,10 @@ SCOPES = [
 
 async def get_client_config() -> Dict[str, Any]:
     """Generates dynamic Client configuration by resolving secrets from DB or Environment."""
-    client_id = await credential_manager.get_secret("google_client_id", provider="google")
-    client_secret = await credential_manager.get_secret("google_client_secret", provider="google")
+    client_id = await credential_manager.get_secret("google_client_id", provider="google_config") or \
+                await credential_manager.get_secret("google_client_id", provider="google")
+    client_secret = await credential_manager.get_secret("google_client_secret", provider="google_config") or \
+                    await credential_manager.get_secret("google_client_secret", provider="google")
     redirect_uri = settings.GOOGLE_REDIRECT_URI
     
     if not client_id or not client_secret:

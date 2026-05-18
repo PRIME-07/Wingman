@@ -60,7 +60,19 @@ function App() {
 
       {/* 2. Main Content Shell (Center Workspace) */}
       <main className="flex-1 flex flex-col relative overflow-hidden bg-white dark:bg-[#000000]">
-        <WingmanPatternBackground />
+        <AnimatePresence>
+          {isEmpty && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8, ease: 'easeInOut' }}
+              className="absolute inset-0 pointer-events-none z-0"
+            >
+              <WingmanPatternBackground />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {activeSidebarTab === 'timers' ? (
           <CalendarView />
@@ -78,7 +90,7 @@ function App() {
               </div>
               
               <div className="flex items-center gap-4">
-                {!isRightSidebarOpen && activeTimers.length > 0 && (
+                {!isRightSidebarOpen && (
                   <button 
                     onClick={() => setRightSidebarOpen(true)}
                     className="p-2 rounded-lg border border-mono-200 dark:border-mono-800 text-mono-500 hover:text-mono-900 dark:hover:text-white transition-all flex items-center gap-2"
@@ -125,7 +137,7 @@ function App() {
 
       {/* 3. Right Activity Pane */}
       <AnimatePresence>
-        {isRightSidebarOpen && activeTimers.length > 0 && <LiveActivitiesSidebar />}
+        {isRightSidebarOpen && <LiveActivitiesSidebar />}
       </AnimatePresence>
 
       {/* Dynamic Overlay Components */}

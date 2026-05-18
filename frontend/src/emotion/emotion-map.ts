@@ -21,7 +21,8 @@ export type WingmanEmotion =
   | 'worried'
   | 'angry'
   | 'bored'
-  | 'shocked';
+  | 'shocked'
+  | 'neutral';
 
 /**
  * Runtime namespace object — mirrors the WingmanEmotion type as a value.
@@ -47,6 +48,7 @@ export const WingmanEmotion = {
   angry: 'angry',
   bored: 'bored',
   shocked: 'shocked',
+  neutral: 'neutral',
 } as const;
 
 
@@ -54,7 +56,7 @@ export const ALL_EMOTIONS: WingmanEmotion[] = [
   'thinking', 'recollecting', 'happy', 'sad', 
   'laughing', 'excited', 'glad', 'proud', 'confused', 
   'embarrassed', 'skeptical', 'shy', 'thankful', 'inLove', 
-  'sleepy', 'worried', 'angry', 'bored', 'shocked'
+  'sleepy', 'worried', 'angry', 'bored', 'shocked', 'neutral'
 ];
 
 /**
@@ -72,6 +74,7 @@ export const EMOTION_PRIORITY: Record<WingmanEmotion, number> = {
   inLove: 65,
   thankful: 60,
   shy: 55,
+  neutral: 52,
   proud: 50,
   glad: 45,
   laughing: 40,

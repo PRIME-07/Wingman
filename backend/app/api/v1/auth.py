@@ -6,6 +6,7 @@ from backend.app.services.credentials.manager import credential_manager
 from backend.app.services.credentials.validator import validator
 from backend.app.core.config import settings
 from backend.app.core.logging import logger
+from cryptography.fernet import Fernet
 from typing import Dict, Any
 
 router = APIRouter()
@@ -108,7 +109,7 @@ async def slack_connect(payload: Dict[str, str]):
         await credential_manager.delete_credential("slack")
         raise HTTPException(status_code=400, detail="Slack token verification failed. Please check your token.")
     
-    success = await credential_manager.save_credential("slack", {"bot_token": token})
+    success = await credential_manager.save_credential("slack", {"slack_bot_token": token})
     if success:
         return {"success": True, "message": "Slack token verified and saved."}
     else:
@@ -203,7 +204,7 @@ async def save_config_secret(payload: Dict[str, Any]):
                 secrets.get("google_client_secret")
             )
         elif provider == "slack":
-            is_valid = await validator.validate_slack(secrets.get("bot_token"))
+            is_valid = await validator.validate_slack(secrets.get("slack_bot_token"))
         elif provider == "engine":
             is_valid = await validator.validate_openai(secrets.get("openai_api_key"))
             if not is_valid:
@@ -250,10 +251,24 @@ async def save_config_secret(payload: Dict[str, Any]):
     else:
         raise HTTPException(status_code=500, detail=f"Failed to save configuration for {provider}.")
 
+@router.post("/config/reset", summary="Reset All Persisted Credentials")
+async def reset_credentials():
+    """
+    Clears all saved third-party credentials from MongoDB.
+    This enables full re-configuration of all integrations.
+    """
+    try:
+        providers = ["google", "google_config", "slack", "engine", "tools"]
+        for provider in providers:
+            await credential_manager.delete_credential(provider)
+        return {"success": True, "message": "All saved configurations have been reset successfully."}
+    except Exception as e:
+        logger.error(f"Error resetting credentials: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to reset credentials: {str(e)}")
+
 @router.get("/generate-encryption-key", summary="Generate a fresh security key")
 async def generate_key():
     """Generates a random AES-256 Fernet key for the user to copy into their .env."""
-    from cryptography.fernet import Fernet
     key = Fernet.generate_key().decode()
     return {
         "key": key,

@@ -34,9 +34,8 @@ function parseMessageExpression(rawContent: string): { expression: string; clean
 
   if (lastFoundExpr) {
     const expr = lastFoundExpr.trim().toLowerCase();
-    const normalizedExpr = expr === 'neutral' ? 'happy' : expr;
-    const found = (KNOWN_EXPRESSIONS.find(k => k.toLowerCase() === normalizedExpr) || "happy") as WingmanEmotion;
-    expression = found === "excited" ? "happy" : found;
+    const found = (KNOWN_EXPRESSIONS.find(k => k.toLowerCase() === expr) || "happy") as WingmanEmotion;
+    expression = found;
 
     // Side effect: update engine with the latest parsed emotion
     emotionEngine.transition(expression);

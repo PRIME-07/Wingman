@@ -66,6 +66,7 @@ interface ChatState {
   checkSlackStatus: () => Promise<void>;
   fetchConfigStatus: () => Promise<void>;
   saveSecret: (provider: string, secrets: Record<string, string>) => Promise<{ success: boolean; message?: string }>;
+  resetConfig: () => Promise<{ success: boolean; message?: string }>;
 }
 
 const getApiBaseUrl = () => {
@@ -303,6 +304,26 @@ export const useChatStore = create<ChatState>((set, get) => ({
       return { success: false, message: data.detail || 'Validation failed' };
     } catch (err) {
       console.error(`[ChatStore] Failed to save secret for ${provider}:`, err);
+      return { success: false, message: 'Network error or system failure' };
+    }
+  },
+
+  resetConfig: async () => {
+    try {
+      const API_BASE_URL = getApiBaseUrl();
+      const res = await fetch(`${API_BASE_URL}/auth/config/reset`, {
+        method: 'POST',
+      });
+      const data = await res.json();
+      if (res.ok) {
+        await get().fetchConfigStatus();
+        await get().checkGoogleStatus();
+        await get().checkSlackStatus();
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.detail || 'Reset failed' };
+    } catch (err) {
+      console.error("[ChatStore] Reset configurations failed:", err);
       return { success: false, message: 'Network error or system failure' };
     }
   },

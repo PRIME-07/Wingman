@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, ExternalLink, Hash, CheckCircle2,
-  AlertCircle, Send, Key, Cloud, Search, Map, Copy, Check,
-  BookOpen, Info, Youtube, Loader2
+  AlertCircle, AlertTriangle, Send, Key, Cloud, Search, Map, Copy, Check,
+  BookOpen, Info, Youtube, Loader2, RotateCcw
 } from 'lucide-react';
 import { useChatStore } from '../stores/useChatStore';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 
-                     import.meta.env.VITE_API_BASE_URL || 
-                     `http://${import.meta.env.VITE_BACKEND_URL || 'localhost:8000'}/api/v1`;
+const API_BASE_URL = import.meta.env.VITE_API_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  `http://${import.meta.env.VITE_BACKEND_URL || 'localhost:8000'}/api/v1`;
 
 // Local Components
-const SecretInput = ({ label, placeholder, value, onChange }: { 
-  label: string; 
-  placeholder: string; 
-  value: string; 
-  onChange: (val: string) => void 
+const SecretInput = ({ label, placeholder, value, onChange }: {
+  label: string;
+  placeholder: string;
+  value: string;
+  onChange: (val: string) => void
 }) => (
   <div className="space-y-2">
     <label className="text-[10px] font-bold uppercase opacity-40">{label}</label>
@@ -36,10 +36,12 @@ export const AuthPrompt: React.FC = () => {
   const {
     googleConnected, slackConnected, configStatus,
     checkGoogleStatus, checkSlackStatus, fetchConfigStatus,
-    saveSecret, theme, isAuthPromptOpen, setAuthPromptOpen
+    saveSecret, theme, isAuthPromptOpen, setAuthPromptOpen,
+    resetConfig
   } = useChatStore();
 
   const [activeTab, setActiveTab] = useState<'status' | 'slack' | 'google' | 'tools' | 'engine'>('status');
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   const [slackToken, setSlackToken] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -83,9 +85,9 @@ export const AuthPrompt: React.FC = () => {
   });
 
   const isEverythingDone = !!(
-    configStatus?.engine?.openai && 
-    slackConnected && 
-    googleConnected && 
+    configStatus?.engine?.openai &&
+    slackConnected &&
+    googleConnected &&
     allToolsVerified
   );
 
@@ -128,9 +130,9 @@ export const AuthPrompt: React.FC = () => {
     if (!isDataLoaded) return;
 
     // Show prompt only if core config or major connections are missing
-    const needsSetup = googleConnected === false || 
+    const needsSetup = googleConnected === false ||
       slackConnected === false ||
-      !configStatus?.google.configured || 
+      !configStatus?.google.configured ||
       !configStatus?.engine?.openai ||
       !allToolsVerified;
 
@@ -185,7 +187,7 @@ settings:
       return;
     }
     setIsSubmitting(true);
-    const { success, message } = await saveSecret('slack', { bot_token: slackToken });
+    const { success, message } = await saveSecret('slack', { slack_bot_token: slackToken });
     if (success) {
       setSlackToken('');
       await checkSlackStatus();
@@ -209,12 +211,12 @@ settings:
       setError('Both Client ID and Secret are required.');
       return;
     }
-    
+
     // Filter out dots to avoid sending dummy values to backend
     const payload = Object.fromEntries(
       Object.entries(googleKeys).filter(([_, v]) => v !== '••••••••')
     );
-    
+
     setIsSubmitting(true);
     const { success, message } = await saveSecret('google_config', payload);
     if (success) {
@@ -255,7 +257,7 @@ settings:
       google_maps_api_key: 'maps',
       youtube_api_key: 'youtube'
     };
-    const allVerified = Object.keys(toolKeys).every(k => 
+    const allVerified = Object.keys(toolKeys).every(k =>
       verifiedKeys[k] || configStatus?.tools[toolMapping[k] as keyof typeof configStatus.tools]
     );
     if (allVerified) {
@@ -295,6 +297,40 @@ settings:
     }, 3000);
   };
 
+  const [isReconfiguring, setIsReconfiguring] = useState(false);
+
+  const handleReconfig = () => {
+    setShowResetConfirm(true);
+  };
+
+  const confirmReconfig = async () => {
+    setIsReconfiguring(true);
+    setError(null);
+    const { success, message } = await resetConfig();
+    if (success) {
+      setSlackToken('');
+      setToolKeys({
+        weather_api_key: '',
+        tavily_api_key: '',
+        google_maps_api_key: '',
+        youtube_api_key: ''
+      });
+      setEngineKeys({
+        openai_api_key: ''
+      });
+      setGoogleKeys({
+        google_client_id: '',
+        google_client_secret: ''
+      });
+      setVerifiedKeys({});
+      setActiveTab('status');
+      setShowResetConfirm(false);
+    } else {
+      setError(message || 'Failed to reset configurations.');
+    }
+    setIsReconfiguring(false);
+  };
+
 
   if (!isAuthPromptOpen) return null;
 
@@ -307,16 +343,62 @@ settings:
           className={`relative w-full max-w-2xl rounded-2xl border ${theme === 'dark' ? 'bg-black border-white/10 text-white' : 'bg-white border-neutral-200 text-black'
             } shadow-2xl overflow-hidden`}
         >
+          <AnimatePresence>
+            {showResetConfirm && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-black/90 backdrop-blur-sm z-[110] flex items-center justify-center p-6"
+              >
+                <motion.div
+                  initial={{ scale: 0.95, y: 10 }}
+                  animate={{ scale: 1, y: 0 }}
+                  exit={{ scale: 0.95, y: 10 }}
+                  className="bg-neutral-950 border border-red-500/20 max-w-sm w-full p-6 rounded-2xl text-center space-y-4 shadow-2xl shadow-red-500/5 text-white"
+                >
+                  <div className="mx-auto w-12 h-12 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center">
+                    <AlertTriangle size={24} className="animate-pulse" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-black uppercase tracking-wider text-red-500">Reset Credentials?</h3>
+                    <p className="text-xs opacity-75 mt-2 leading-relaxed">
+                      This will permanently delete all API keys, Slack tokens, and Google Cloud credentials from the database. You will need to configure them again.
+                    </p>
+                  </div>
+                  <div className="flex gap-3 pt-2">
+                    <button
+                      onClick={() => setShowResetConfirm(false)}
+                      className="flex-1 py-2.5 rounded-xl border border-white/10 text-xs font-bold hover:bg-white/5 active:scale-95 transition-all text-white"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={confirmReconfig}
+                      disabled={isReconfiguring}
+                      className="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 disabled:bg-red-900 text-white text-xs font-bold active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg shadow-red-600/20"
+                    >
+                      {isReconfiguring ? (
+                        <Loader2 size={12} className="animate-spin" />
+                      ) : (
+                        'Yes, Clear All'
+                      )}
+                    </button>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
           <button
-              onClick={() => setAuthPromptOpen(false)}
-              className="absolute top-4 right-4 p-2 text-mono-400 hover:text-white transition-colors"
-            >
-              <X size={16} />
-            </button>
+            onClick={() => setAuthPromptOpen(false)}
+            className="absolute top-4 right-4 p-2 text-mono-400 hover:text-white transition-colors"
+          >
+            <X size={16} />
+          </button>
           <div className="flex h-[550px]">
             {/* Sidebar Tabs */}
             <div className={`w-48 border-r ${theme === 'dark' ? 'border-white/10 bg-black' : 'border-neutral-100 bg-neutral-50/50'} p-4 flex flex-col gap-2`}>
-              <div 
+              <div
                 onClick={() => { setActiveTab('status'); setError(null); }}
                 className={`flex flex-col items-center gap-2 mb-8 cursor-pointer p-2 transition-all ${activeTab === 'status' ? 'opacity-100 scale-110' : 'opacity-40 hover:opacity-100'}`}
               >
@@ -347,6 +429,15 @@ settings:
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all ${activeTab === 'tools' ? 'bg-white/10 text-white font-bold' : 'opacity-60 hover:opacity-100'}`}
               >
                 <Cloud size={16} /> Tool Keys
+              </button>
+
+              <button
+                onClick={handleReconfig}
+                disabled={isReconfiguring}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all text-red-500 hover:bg-red-500/10 active:scale-95 disabled:opacity-50 mt-1 cursor-pointer text-left"
+              >
+                <RotateCcw size={16} className={isReconfiguring ? 'animate-spin' : ''} />
+                {isReconfiguring ? 'Clearing...' : 'Re-config'}
               </button>
 
               <div className="mt-auto pt-4 border-t border-white/10">
@@ -425,7 +516,7 @@ settings:
                               <button onClick={() => setActiveTab('google')} className="px-3 py-1 bg-white text-black text-[10px] font-bold rounded-md uppercase tracking-wider">Configure</button>
                             )}
                             {configStatus?.google.configured && !googleConnected && (
-                              <button 
+                              <button
                                 onClick={handleConnectGoogle}
                                 className="px-3 py-1 bg-white text-black text-[10px] font-bold rounded-md uppercase tracking-wider hover:scale-105 transition-all"
                               >
@@ -449,20 +540,20 @@ settings:
                             {allToolsVerified ? (
                               <CheckCircle2 className="text-white" size={18} />
                             ) : (
-                              <button onClick={() => setActiveTab('tools')} className="px-3 py-1 bg-white text-black text-[10px] font-bold rounded-md uppercase">Manage</button>
+                              <button onClick={() => setActiveTab('tools')} className="px-3 py-1 bg-white text-black text-[10px] font-bold rounded-md uppercase">Configure</button>
                             )}
                           </div>
                         </>
                       ) : (
                         /* Final Completion UI */
-                        <motion.div 
+                        <motion.div
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
                           className="flex flex-col items-center justify-center py-10 text-center"
                         >
                           <h3 className="text-6xl font-black mb-4 tracking-tighter uppercase">All Done!</h3>
                           <p className="text-lg opacity-60 mb-8 max-w-md">Wingman is fully fueled, encrypted, and ready for take-off.</p>
-                          <button 
+                          <button
                             onClick={() => setAuthPromptOpen(false)}
                             className="px-16 py-5 bg-white text-black font-black rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-[0_0_50px_rgba(255,255,255,0.3)] uppercase tracking-[0.2em] text-2xl"
                           >
@@ -527,11 +618,10 @@ oauth_config:
                           <button
                             disabled={isSubmitting || slackToken === '••••••••'}
                             onClick={handleSaveSlack}
-                            className={`px-6 font-bold rounded-lg transition-all flex items-center gap-2 ${
-                              slackToken === '••••••••'
+                            className={`px-6 font-bold rounded-lg transition-all flex items-center gap-2 ${slackToken === '••••••••'
                                 ? 'bg-white/10 text-white cursor-default'
                                 : 'bg-white text-black hover:bg-white/90 shadow-lg'
-                            }`}
+                              }`}
                           >
                             {isSubmitting ? (
                               <Loader2 size={16} className="animate-spin" />
@@ -580,14 +670,14 @@ oauth_config:
                           value={googleKeys.google_client_secret}
                           onChange={(val) => setGoogleKeys({ ...googleKeys, google_client_secret: val })}
                         />
-                        
+
                         <div className="p-3 rounded-lg bg-blue-500/10 border border-blue-500/20 mb-4">
                           <div className="text-[10px] text-blue-400 font-bold uppercase mb-1">OAuth Redirect URI</div>
                           <div className="flex items-center justify-between gap-2">
                             <code className="text-[10px] bg-black/40 px-2 py-1 rounded select-all break-all">
                               {import.meta.env.VITE_BACKEND_URL ? `http://${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/google/callback` : 'http://localhost:8000/api/v1/auth/google/callback'}
                             </code>
-                            <button 
+                            <button
                               onClick={() => {
                                 navigator.clipboard.writeText(import.meta.env.VITE_BACKEND_URL ? `http://${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/google/callback` : 'http://localhost:8000/api/v1/auth/google/callback');
                                 // Could add a temporary "Copied" tooltip here if we had state for it
@@ -607,11 +697,10 @@ oauth_config:
                           <button
                             disabled={isSubmitting || (configStatus?.google.configured && !!googleConnected && googleKeys.google_client_id === '••••••••' && googleKeys.google_client_secret === '••••••••')}
                             onClick={handleSaveGoogleConfig}
-                            className={`w-full py-3 font-bold rounded-xl transition-all flex items-center justify-center gap-2 ${
-                              configStatus?.google.configured && googleConnected
+                            className={`w-full py-3 font-bold rounded-xl transition-all flex items-center justify-center gap-2 ${configStatus?.google.configured && googleConnected
                                 ? 'bg-green-500/20 text-green-500 border border-green-500/50'
                                 : 'bg-white text-black hover:bg-white/90 shadow-lg'
-                            }`}
+                              }`}
                           >
                             {isSubmitting ? (
                               <Loader2 size={16} className="animate-spin" />
@@ -667,11 +756,10 @@ oauth_config:
                             <button
                               onClick={() => handleVerifySingleTool('tools', tool.id, toolKeys[tool.id as keyof typeof toolKeys])}
                               disabled={verifyingKey === tool.id || !toolKeys[tool.id as keyof typeof toolKeys] || (toolKeys[tool.id as keyof typeof toolKeys] === '••••••••')}
-                              className={`absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${
-                                (verifiedKeys[tool.id] || toolKeys[tool.id as keyof typeof toolKeys] === '••••••••')
-                                  ? 'bg-green-500/20 text-green-500 border border-green-500/50 cursor-default' 
+                              className={`absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${(verifiedKeys[tool.id] || toolKeys[tool.id as keyof typeof toolKeys] === '••••••••')
+                                  ? 'bg-green-500/20 text-green-500 border border-green-500/50 cursor-default'
                                   : 'bg-white/10 hover:bg-white text-white hover:text-black disabled:opacity-30 disabled:hover:bg-white/10 disabled:hover:text-white'
-                              }`}
+                                }`}
                             >
                               {verifyingKey === tool.id ? (
                                 <Loader2 size={12} className="animate-spin" />
@@ -734,11 +822,10 @@ oauth_config:
                           <button
                             onClick={() => handleVerifySingleTool('engine', 'openai_api_key', engineKeys.openai_api_key)}
                             disabled={verifyingKey === 'openai_api_key' || !engineKeys.openai_api_key || engineKeys.openai_api_key === '••••••••'}
-                            className={`absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${
-                              (verifiedKeys['openai_api_key'] || engineKeys.openai_api_key === '••••••••')
-                                ? 'bg-green-500/20 text-green-500 border border-green-500/50 cursor-default' 
+                            className={`absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${(verifiedKeys['openai_api_key'] || engineKeys.openai_api_key === '••••••••')
+                                ? 'bg-green-500/20 text-green-500 border border-green-500/50 cursor-default'
                                 : 'bg-white/10 hover:bg-white text-white hover:text-black disabled:opacity-30 disabled:hover:bg-white/10 disabled:hover:text-white'
-                            }`}
+                              }`}
                           >
                             {verifyingKey === 'openai_api_key' ? (
                               <Loader2 size={12} className="animate-spin" />
@@ -755,11 +842,10 @@ oauth_config:
                         <button
                           disabled={isSubmitting || engineKeys.openai_api_key === '••••••••'}
                           onClick={handleSaveEngine}
-                          className={`w-full py-3 font-bold rounded-xl transition-all flex items-center justify-center gap-2 ${
-                            engineKeys.openai_api_key === '••••••••'
+                          className={`w-full py-3 font-bold rounded-xl transition-all flex items-center justify-center gap-2 ${engineKeys.openai_api_key === '••••••••'
                               ? 'bg-white/10 text-white cursor-default'
                               : 'bg-white text-black hover:bg-white/90 shadow-lg'
-                          }`}
+                            }`}
                         >
                           {isSubmitting ? (
                             <Loader2 size={16} className="animate-spin" />

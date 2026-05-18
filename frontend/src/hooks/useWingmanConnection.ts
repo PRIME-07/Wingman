@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { useChatStore } from '../stores/useChatStore';
 import type { HITLRequest } from '../types';
+import { emotionEngine } from '../emotion/engine';
 
 
 // Production-safe dynamic base URL resolver
@@ -19,6 +20,7 @@ export function useWingmanConnection(threadId: string = 'default-session') {
     updateLastMessage,
     setLastMessageContent,
     addTelemetry,
+    clearTelemetry,
     setHITL,
     setStreaming,
     setWsConnected,
@@ -219,6 +221,10 @@ export function useWingmanConnection(threadId: string = 'default-session') {
       return;
     }
 
+    // 0. Reset state & telemetry to avoid carry-over emotions
+    clearTelemetry();
+    emotionEngine.transition('happy');
+
     // 1. Push UI message
     addMessage('user', messageText);
 
@@ -246,7 +252,7 @@ export function useWingmanConnection(threadId: string = 'default-session') {
     }
 
     chatWs.current.send(JSON.stringify(packet));
-  }, [addMessage, setStreaming, setHITL, currentReasoningEffort, currentModel]);
+  }, [addMessage, setStreaming, setHITL, currentReasoningEffort, currentModel, clearTelemetry]);
 
   // HITL decision router
   const respondHITL = useCallback((approved: boolean, reason: string = '') => {

@@ -22,7 +22,7 @@ class SlackService:
         Extracts active bot token from persistent encrypted storage.
         Falls back to bootstrap configuration values.
         """
-        token = await credential_manager.get_secret("bot_token", provider="slack")
+        token = await credential_manager.get_secret("slack_bot_token", provider="slack")
         if token and "xoxb" in token:
             return token
             
