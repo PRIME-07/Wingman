@@ -51,12 +51,15 @@ class CalendarService:
     async def create_event(
         self,
         summary: str,
-        start_iso: str,
-        end_iso: str,
+        start_iso: Optional[str] = None,
+        end_iso: Optional[str] = None,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
         description: Optional[str] = None,
         location: Optional[str] = None,
         attendees: Optional[List[str]] = None,
-        timezone: str = "UTC"
+        timezone: str = "UTC",
+        recurrence: Optional[List[str]] = None
     ) -> Dict[str, Any]:
         """
         Commits a calendar event directly to Google servers.
@@ -68,16 +71,28 @@ class CalendarService:
             event_body = {
                 "summary": summary,
                 "description": description or "",
-                "location": location or "",
-                "start": {
+                "location": location or ""
+            }
+            
+            if start_date and end_date:
+                event_body["start"] = {
+                    "date": start_date
+                }
+                event_body["end"] = {
+                    "date": end_date
+                }
+            else:
+                event_body["start"] = {
                     "dateTime": start_iso,
                     "timeZone": timezone
-                },
-                "end": {
+                }
+                event_body["end"] = {
                     "dateTime": end_iso,
                     "timeZone": timezone
                 }
-            }
+                
+            if recurrence:
+                event_body["recurrence"] = recurrence
             
             if attendees:
                 event_body["attendees"] = [{"email": email} for email in attendees]
@@ -224,9 +239,12 @@ class CalendarService:
         summary: Optional[str] = None,
         start_iso: Optional[str] = None,
         end_iso: Optional[str] = None,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
         description: Optional[str] = None,
         location: Optional[str] = None,
-        timezone: str = "UTC"
+        timezone: str = "UTC",
+        recurrence: Optional[List[str]] = None
     ) -> Dict[str, Any]:
         """
         Updates an existing calendar event using Google's patch/update API.
@@ -244,16 +262,28 @@ class CalendarService:
             if location is not None:
                 event["location"] = location
                 
-            if start_iso is not None:
+            if start_date is not None and end_date is not None:
+                event["start"] = {
+                    "date": start_date
+                }
+                event["end"] = {
+                    "date": end_date
+                }
+            elif start_iso is not None and end_iso is not None:
                 event["start"] = {
                     "dateTime": start_iso,
                     "timeZone": timezone
                 }
-            if end_iso is not None:
                 event["end"] = {
                     "dateTime": end_iso,
                     "timeZone": timezone
                 }
+                
+            if recurrence is not None:
+                if len(recurrence) == 0:
+                    event["recurrence"] = None
+                else:
+                    event["recurrence"] = recurrence
                 
             logger.info(f"[CalendarService] Attempting scheduled update for event ID: {event_id}")
             updated_event = client.events().update(

@@ -67,19 +67,25 @@ from typing import Optional
 
 class CreateEventPayload(BaseModel):
     summary: str
-    start_iso: str
-    end_iso: str
+    start_iso: Optional[str] = None
+    end_iso: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
     description: Optional[str] = None
     location: Optional[str] = None
     timezone: str = "UTC"
+    recurrence: Optional[List[str]] = None
 
 class UpdateEventPayload(BaseModel):
     summary: Optional[str] = None
     start_iso: Optional[str] = None
     end_iso: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
     description: Optional[str] = None
     location: Optional[str] = None
     timezone: str = "UTC"
+    recurrence: Optional[List[str]] = None
 
 @router.post("/events/create", response_model=Dict[str, Any])
 async def api_create_event(payload: CreateEventPayload):
@@ -91,9 +97,12 @@ async def api_create_event(payload: CreateEventPayload):
             summary=payload.summary,
             start_iso=payload.start_iso,
             end_iso=payload.end_iso,
+            start_date=payload.start_date,
+            end_date=payload.end_date,
             description=payload.description,
             location=payload.location,
-            timezone=payload.timezone
+            timezone=payload.timezone,
+            recurrence=payload.recurrence
         )
         return {
             "success": True,
@@ -117,9 +126,12 @@ async def api_update_event(event_id: str, payload: UpdateEventPayload):
             summary=payload.summary,
             start_iso=payload.start_iso,
             end_iso=payload.end_iso,
+            start_date=payload.start_date,
+            end_date=payload.end_date,
             description=payload.description,
             location=payload.location,
-            timezone=payload.timezone
+            timezone=payload.timezone,
+            recurrence=payload.recurrence
         )
         return result
     except PermissionError as pe:

@@ -33,6 +33,8 @@ interface CalendarEvent {
     dateTime?: string;
     date?: string;
   };
+  recurrence?: string[];
+  recurringEventId?: string;
 }
 
 export function CalendarView() {
@@ -361,6 +363,160 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
 
   const [isMutating, setIsMutating] = useState(false);
 
+  // Helper date tools
+  const formatDateLocal = (d: Date) => {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const getThreeMonthsAfter = (d: Date) => {
+    const copy = new Date(d);
+    copy.setMonth(copy.getMonth() + 3);
+    return formatDateLocal(copy);
+  };
+
+  const getDayCode = (dayIndex: number): string => {
+    return ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'][dayIndex];
+  };
+
+  const getOrdinalWord = (day: number): string => {
+    const ordinals = ['first', 'second', 'third', 'fourth', 'fifth'];
+    const idx = Math.floor((day - 1) / 7);
+    return ordinals[idx] || 'first';
+  };
+
+  const getOrdinalNum = (day: number): number => {
+    return 1 + Math.floor((day - 1) / 7);
+  };
+
+  const getRepeatOptions = (targetDate: Date) => {
+    const dayIndex = targetDate.getDay();
+    const dayName = targetDate.toLocaleDateString('default', { weekday: 'long' });
+    const dayCode = getDayCode(dayIndex);
+    const day = targetDate.getDate();
+    const ordinalWord = getOrdinalWord(day);
+    const ordinalNum = getOrdinalNum(day);
+    const monthName = targetDate.toLocaleDateString('default', { month: 'long' });
+    
+    return [
+      { label: 'Does not repeat', rrule: '' },
+      { label: 'Daily', rrule: 'RRULE:FREQ=DAILY' },
+      { label: `Weekly on ${dayName}`, rrule: `RRULE:FREQ=WEEKLY;BYDAY=${dayCode}` },
+      { label: `Monthly on the ${ordinalWord} ${dayName}`, rrule: `RRULE:FREQ=MONTHLY;BYDAY=${ordinalNum}${dayCode}` },
+      { label: `Annually on ${monthName} ${day}`, rrule: 'RRULE:FREQ=YEARLY' },
+      { label: 'Every weekday (Monday to Friday)', rrule: 'RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR' },
+      { label: 'Custom...', rrule: 'CUSTOM' }
+    ];
+  };
+
+  const repeatOptions = getRepeatOptions(date);
+
+  // States for All-day, Repeat, and Custom Recurrence
+  const [createIsAllDay, setCreateIsAllDay] = useState(false);
+  const [createRepeat, setCreateRepeat] = useState('');
+  const [createCustomRrule, setCreateCustomRrule] = useState('');
+
+  const [editIsAllDay, setEditIsAllDay] = useState(false);
+  const [editRepeat, setEditRepeat] = useState('');
+  const [editCustomRrule, setEditCustomRrule] = useState('');
+
+  // Custom Recurrence Dialog states
+  const [customModalOpen, setCustomModalOpen] = useState(false);
+  const [customModalTarget, setCustomModalTarget] = useState<'create' | 'edit'>('create');
+  const [customRepeatEvery, setCustomRepeatEvery] = useState(1);
+  const [customFrequency, setCustomFrequency] = useState<'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY'>('WEEKLY');
+  const [customRepeatOn, setCustomRepeatOn] = useState<string[]>([getDayCode(date.getDay())]);
+  const [customEnds, setCustomEnds] = useState<'never' | 'on' | 'after'>('never');
+  const [customEndsOn, setCustomEndsOn] = useState(getThreeMonthsAfter(date));
+  const [customEndsAfter, setCustomEndsAfter] = useState(13);
+
+  // Helper to parse recurrence array
+  const parseRecurrence = (recurrenceList?: string[]) => {
+    if (!recurrenceList || recurrenceList.length === 0) {
+      return { repeat: '', customRrule: '' };
+    }
+    const rruleStr = recurrenceList[0];
+    const options = getRepeatOptions(date);
+    const matchedOption = options.find(opt => opt.rrule === rruleStr);
+    
+    if (matchedOption) {
+      return { repeat: rruleStr, customRrule: '' };
+    } else {
+      return { repeat: rruleStr, customRrule: rruleStr };
+    }
+  };
+
+  // Helper to parse custom RRULE into interactive states
+  const parseCustomRruleToStates = (rruleStr: string) => {
+    const cleanStr = rruleStr.replace(/^RRULE:/i, '');
+    const parts = cleanStr.split(';');
+    
+    let freq: 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY' = 'WEEKLY';
+    let interval = 1;
+    let byday: string[] = [getDayCode(date.getDay())];
+    let ends: 'never' | 'on' | 'after' = 'never';
+    let endsOn = getThreeMonthsAfter(date);
+    let endsAfter = 13;
+    
+    parts.forEach(part => {
+      const [key, val] = part.split('=');
+      if (!key || !val) return;
+      
+      const upperKey = key.toUpperCase();
+      if (upperKey === 'FREQ') {
+        freq = val.toUpperCase() as any;
+      } else if (upperKey === 'INTERVAL') {
+        interval = parseInt(val, 10) || 1;
+      } else if (upperKey === 'BYDAY') {
+        byday = val.split(',');
+      } else if (upperKey === 'UNTIL') {
+        const year = val.substring(0, 4);
+        const month = val.substring(4, 6);
+        const day = val.substring(6, 8);
+        ends = 'on';
+        endsOn = `${year}-${month}-${day}`;
+      } else if (upperKey === 'COUNT') {
+        ends = 'after';
+        endsAfter = parseInt(val, 10) || 13;
+      }
+    });
+    
+    setCustomRepeatEvery(interval);
+    setCustomFrequency(freq);
+    setCustomRepeatOn(byday);
+    setCustomEnds(ends);
+    setCustomEndsOn(endsOn);
+    setCustomEndsAfter(endsAfter);
+  };
+
+  const handleRepeatChange = (value: string, isEdit: boolean) => {
+    if (value === 'CUSTOM') {
+      const target = isEdit ? 'edit' : 'create';
+      setCustomModalTarget(target);
+      const existingRrule = isEdit ? editCustomRrule : createCustomRrule;
+      if (existingRrule) {
+        parseCustomRruleToStates(existingRrule);
+      } else {
+        // Default values
+        setCustomRepeatEvery(1);
+        setCustomFrequency('WEEKLY');
+        setCustomRepeatOn([getDayCode(date.getDay())]);
+        setCustomEnds('never');
+        setCustomEndsOn(getThreeMonthsAfter(date));
+        setCustomEndsAfter(13);
+      }
+      setCustomModalOpen(true);
+    } else {
+      if (isEdit) {
+        setEditRepeat(value);
+      } else {
+        setCreateRepeat(value);
+      }
+    }
+  };
+
   // Sync events from parent updates
   useEffect(() => {
     setLocalEvents(events);
@@ -510,14 +666,29 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
     if (!createSummary.trim()) return;
 
     setIsMutating(true);
-    const [startHour, startMin] = createStartTime.split(':').map(Number);
-    const [endHour, endMin] = createEndTime.split(':').map(Number);
 
-    const startObj = new Date(date);
-    startObj.setHours(startHour, startMin, 0, 0);
+    let start_iso: string | undefined = undefined;
+    let end_iso: string | undefined = undefined;
+    let start_date: string | undefined = undefined;
+    let end_date: string | undefined = undefined;
 
-    const endObj = new Date(date);
-    endObj.setHours(endHour, endMin, 0, 0);
+    if (createIsAllDay) {
+      start_date = formatDateLocal(date);
+      const nextDay = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+      end_date = formatDateLocal(nextDay);
+    } else {
+      const [startHour, startMin] = createStartTime.split(':').map(Number);
+      const [endHour, endMin] = createEndTime.split(':').map(Number);
+
+      const startObj = new Date(date);
+      startObj.setHours(startHour, startMin, 0, 0);
+
+      const endObj = new Date(date);
+      endObj.setHours(endHour, endMin, 0, 0);
+
+      start_iso = startObj.toISOString();
+      end_iso = endObj.toISOString();
+    }
 
     try {
       const res = await fetch(`${API_BASE_URL}/calendar/events/create`, {
@@ -525,10 +696,13 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           summary: createSummary,
-          start_iso: startObj.toISOString(),
-          end_iso: endObj.toISOString(),
+          start_iso,
+          end_iso,
+          start_date,
+          end_date,
           description: createDescription || undefined,
-          location: createLocation || undefined
+          location: createLocation || undefined,
+          recurrence: createRepeat ? [createRepeat] : undefined
         })
       });
 
@@ -546,18 +720,27 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
 
   // Triggering edit modal
   const triggerEdit = (ev: CalendarEvent) => {
-    if (!ev.start.dateTime || !ev.end.dateTime) return; // ignore all day events for edit
     setEditEvent(ev);
-    
-    const startObj = new Date(ev.start.dateTime);
-    const endObj = new Date(ev.end.dateTime);
-    const padZero = (n: number) => n.toString().padStart(2, '0');
-    
-    setEditStartTime(`${padZero(startObj.getHours())}:${padZero(startObj.getMinutes())}`);
-    setEditEndTime(`${padZero(endObj.getHours())}:${padZero(endObj.getMinutes())}`);
     setEditSummary(ev.summary || '');
     setEditDescription(ev.description || '');
     setEditLocation(ev.location || '');
+
+    const { repeat, customRrule } = parseRecurrence(ev.recurrence);
+    setEditRepeat(repeat);
+    setEditCustomRrule(customRrule);
+
+    if (ev.start?.date) {
+      setEditIsAllDay(true);
+      setEditStartTime('09:00');
+      setEditEndTime('10:00');
+    } else {
+      setEditIsAllDay(false);
+      const startObj = new Date(ev.start.dateTime!);
+      const endObj = new Date(ev.end.dateTime!);
+      const padZero = (n: number) => n.toString().padStart(2, '0');
+      setEditStartTime(`${padZero(startObj.getHours())}:${padZero(startObj.getMinutes())}`);
+      setEditEndTime(`${padZero(endObj.getHours())}:${padZero(endObj.getMinutes())}`);
+    }
   };
 
   // Update event submission
@@ -566,25 +749,44 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
     if (!editEvent || !editSummary.trim()) return;
 
     setIsMutating(true);
-    const [startHour, startMin] = editStartTime.split(':').map(Number);
-    const [endHour, endMin] = editEndTime.split(':').map(Number);
+    const targetId = editEvent.recurringEventId || editEvent.id;
 
-    const startObj = new Date(date);
-    startObj.setHours(startHour, startMin, 0, 0);
+    let start_iso: string | undefined = undefined;
+    let end_iso: string | undefined = undefined;
+    let start_date: string | undefined = undefined;
+    let end_date: string | undefined = undefined;
 
-    const endObj = new Date(date);
-    endObj.setHours(endHour, endMin, 0, 0);
+    if (editIsAllDay) {
+      start_date = formatDateLocal(date);
+      const nextDay = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+      end_date = formatDateLocal(nextDay);
+    } else {
+      const [startHour, startMin] = editStartTime.split(':').map(Number);
+      const [endHour, endMin] = editEndTime.split(':').map(Number);
+
+      const startObj = new Date(date);
+      startObj.setHours(startHour, startMin, 0, 0);
+
+      const endObj = new Date(date);
+      endObj.setHours(endHour, endMin, 0, 0);
+
+      start_iso = startObj.toISOString();
+      end_iso = endObj.toISOString();
+    }
 
     try {
-      const res = await fetch(`${API_BASE_URL}/calendar/events/${editEvent.id}`, {
+      const res = await fetch(`${API_BASE_URL}/calendar/events/${targetId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           summary: editSummary,
-          start_iso: startObj.toISOString(),
-          end_iso: endObj.toISOString(),
+          start_iso,
+          end_iso,
+          start_date,
+          end_date,
           description: editDescription || undefined,
-          location: editLocation || undefined
+          location: editLocation || undefined,
+          recurrence: editRepeat ? [editRepeat] : []
         })
       });
 
@@ -605,8 +807,9 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
     if (!editEvent) return;
 
     setIsMutating(true);
+    const targetId = editEvent.recurringEventId || editEvent.id;
     try {
-      const res = await fetch(`${API_BASE_URL}/calendar/events/${editEvent.id}`, {
+      const res = await fetch(`${API_BASE_URL}/calendar/events/${targetId}`, {
         method: 'DELETE'
       });
 
@@ -660,7 +863,8 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
               {allDayEvents.map((ev, idx) => (
                 <div 
                   key={ev.id || idx}
-                  className="px-3 py-1.5 bg-mono-900 dark:bg-white rounded-lg flex items-center gap-2 shadow-sm"
+                  onClick={() => triggerEdit(ev)}
+                  className="px-3 py-1.5 bg-mono-900 dark:bg-white rounded-lg flex items-center gap-2 shadow-sm cursor-pointer hover:opacity-85 active:scale-95 transition-all"
                 >
                   <div className="w-1 h-1 rounded-full bg-white dark:bg-mono-900" />
                   <span className="text-[10px] font-black uppercase font-mono text-white dark:text-mono-900">
@@ -803,10 +1007,13 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
                     <div className="relative">
                       <input 
                         type="time" 
-                        required
+                        required={!createIsAllDay}
+                        disabled={createIsAllDay}
                         value={createStartTime}
                         onChange={(e) => setCreateStartTime(e.target.value)}
-                        className="w-full text-xs font-mono p-2.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white"
+                        className={`w-full text-xs font-mono p-2.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white ${
+                          createIsAllDay ? 'opacity-50 cursor-not-allowed bg-mono-50/50 dark:bg-mono-950/20' : ''
+                        }`}
                       />
                     </div>
                   </div>
@@ -815,13 +1022,51 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
                     <div className="relative">
                       <input 
                         type="time" 
-                        required
+                        required={!createIsAllDay}
+                        disabled={createIsAllDay}
                         value={createEndTime}
                         onChange={(e) => setCreateEndTime(e.target.value)}
-                        className="w-full text-xs font-mono p-2.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white"
+                        className={`w-full text-xs font-mono p-2.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white ${
+                          createIsAllDay ? 'opacity-50 cursor-not-allowed bg-mono-50/50 dark:bg-mono-950/20' : ''
+                        }`}
                       />
                     </div>
                   </div>
+                </div>
+
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="create-all-day"
+                      checked={createIsAllDay}
+                      onChange={(e) => setCreateIsAllDay(e.target.checked)}
+                      className="w-4 h-4 rounded border-mono-300 dark:border-mono-800 text-mono-900 focus:ring-0 dark:bg-black dark:text-white"
+                    />
+                    <label htmlFor="create-all-day" className="text-xs font-mono font-bold text-mono-750 dark:text-mono-300 cursor-pointer select-none">
+                      All-day
+                    </label>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[9px] font-mono uppercase font-black tracking-wider text-mono-400">Repeat</label>
+                  <select
+                    value={createRepeat}
+                    onChange={(e) => handleRepeatChange(e.target.value, false)}
+                    className="w-full text-xs font-mono p-2.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white"
+                  >
+                    {repeatOptions.map((opt) => (
+                      <option key={opt.rrule} value={opt.rrule} className="bg-white dark:bg-[#0d0d0d] text-mono-900 dark:text-white">
+                        {opt.label}
+                      </option>
+                    ))}
+                    {createCustomRrule && (
+                      <option value={createCustomRrule} className="bg-white dark:bg-[#0d0d0d] text-mono-900 dark:text-white">
+                        Custom recurrence
+                      </option>
+                    )}
+                  </select>
                 </div>
 
                 <div className="space-y-1">
@@ -903,22 +1148,63 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
                     <label className="text-[9px] font-mono uppercase font-black tracking-wider text-mono-400">Start Time</label>
                     <input 
                       type="time" 
-                      required
+                      required={!editIsAllDay}
+                      disabled={editIsAllDay}
                       value={editStartTime}
                       onChange={(e) => setEditStartTime(e.target.value)}
-                      className="w-full text-xs font-mono p-2.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white"
+                      className={`w-full text-xs font-mono p-2.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white ${
+                        editIsAllDay ? 'opacity-50 cursor-not-allowed bg-mono-50/50 dark:bg-mono-950/20' : ''
+                      }`}
                     />
                   </div>
                   <div className="space-y-1">
                     <label className="text-[9px] font-mono uppercase font-black tracking-wider text-mono-400">End Time</label>
                     <input 
                       type="time" 
-                      required
+                      required={!editIsAllDay}
+                      disabled={editIsAllDay}
                       value={editEndTime}
                       onChange={(e) => setEditEndTime(e.target.value)}
-                      className="w-full text-xs font-mono p-2.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white"
+                      className={`w-full text-xs font-mono p-2.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white ${
+                        editIsAllDay ? 'opacity-50 cursor-not-allowed bg-mono-50/50 dark:bg-mono-950/20' : ''
+                      }`}
                     />
                   </div>
+                </div>
+
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="edit-all-day"
+                      checked={editIsAllDay}
+                      onChange={(e) => setEditIsAllDay(e.target.checked)}
+                      className="w-4 h-4 rounded border-mono-300 dark:border-mono-800 text-mono-900 focus:ring-0 dark:bg-black dark:text-white"
+                    />
+                    <label htmlFor="edit-all-day" className="text-xs font-mono font-bold text-mono-750 dark:text-mono-300 cursor-pointer select-none">
+                      All-day
+                    </label>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[9px] font-mono uppercase font-black tracking-wider text-mono-400">Repeat</label>
+                  <select
+                    value={editRepeat}
+                    onChange={(e) => handleRepeatChange(e.target.value, true)}
+                    className="w-full text-xs font-mono p-2.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white"
+                  >
+                    {repeatOptions.map((opt) => (
+                      <option key={opt.rrule} value={opt.rrule} className="bg-white dark:bg-[#0d0d0d] text-mono-900 dark:text-white">
+                        {opt.label}
+                      </option>
+                    ))}
+                    {editCustomRrule && (
+                      <option value={editCustomRrule} className="bg-white dark:bg-[#0d0d0d] text-mono-900 dark:text-white">
+                        Custom recurrence
+                      </option>
+                    )}
+                  </select>
                 </div>
 
                 <div className="space-y-1">
@@ -970,6 +1256,216 @@ function DayViewOverlay({ date, events, onClose, onRefresh }: DayViewOverlayProp
                   </button>
                 </div>
               </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* CUSTOM RECURRENCE MODAL */}
+      <AnimatePresence>
+        {customModalOpen && (
+          <div className="fixed inset-0 bg-black/75 backdrop-blur-md flex items-center justify-center p-4 z-[300] select-none animate-in fade-in duration-200">
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-white dark:bg-[#0d0d0d] border border-mono-200 dark:border-mono-800 max-w-sm w-full rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+            >
+              <div className="p-5 border-b border-mono-200 dark:border-mono-900 bg-mono-50 dark:bg-black/40 flex items-center justify-between">
+                <span className="text-xs font-mono uppercase font-black tracking-wider text-mono-900 dark:text-white">Custom recurrence</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCustomModalOpen(false);
+                    if (customModalTarget === 'edit') {
+                      setEditRepeat(editCustomRrule || '');
+                    } else {
+                      setCreateRepeat(createCustomRrule || '');
+                    }
+                  }}
+                  className="p-1 hover:bg-mono-200 dark:hover:bg-mono-800 rounded-lg text-mono-400 hover:text-mono-900 dark:hover:text-white"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+
+              <div className="p-5 space-y-4">
+                {/* Repeat every X days/weeks/months/years */}
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-mono text-mono-750 dark:text-mono-300">Repeat every</span>
+                  <input
+                    type="number"
+                    min="1"
+                    value={customRepeatEvery}
+                    onChange={(e) => setCustomRepeatEvery(Math.max(1, parseInt(e.target.value, 10) || 1))}
+                    className="w-16 text-center text-xs font-mono p-2 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white"
+                  />
+                  <select
+                    value={customFrequency}
+                    onChange={(e) => setCustomFrequency(e.target.value as any)}
+                    className="text-xs font-mono p-2 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white"
+                  >
+                    <option value="DAILY" className="bg-white dark:bg-[#0d0d0d] text-mono-900 dark:text-white">day</option>
+                    <option value="WEEKLY" className="bg-white dark:bg-[#0d0d0d] text-mono-900 dark:text-white">week</option>
+                    <option value="MONTHLY" className="bg-white dark:bg-[#0d0d0d] text-mono-900 dark:text-white">month</option>
+                    <option value="YEARLY" className="bg-white dark:bg-[#0d0d0d] text-mono-900 dark:text-white">year</option>
+                  </select>
+                </div>
+
+                {/* Repeat on (Days of week) - visible only if weekly */}
+                {customFrequency === 'WEEKLY' && (
+                  <div className="space-y-2">
+                    <span className="text-[9px] font-mono uppercase font-black tracking-wider text-mono-400 block">Repeat on</span>
+                    <div className="flex gap-2">
+                      {['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'].map((dayCode, idx) => {
+                        const isSelected = customRepeatOn.includes(dayCode);
+                        return (
+                          <button
+                            key={dayCode}
+                            type="button"
+                            onClick={() => {
+                              if (isSelected) {
+                                if (customRepeatOn.length > 1) {
+                                  setCustomRepeatOn(customRepeatOn.filter(d => d !== dayCode));
+                                }
+                              } else {
+                                setCustomRepeatOn([...customRepeatOn, dayCode]);
+                              }
+                            }}
+                            className={`w-8 h-8 rounded-full text-xs font-mono font-bold flex items-center justify-center border transition-all ${
+                              isSelected
+                                ? 'bg-mono-900 dark:bg-white text-white dark:text-mono-900 border-transparent shadow'
+                                : 'bg-transparent border-mono-200 dark:border-mono-800 text-mono-400 dark:text-mono-500 hover:border-mono-400 dark:hover:border-mono-750'
+                            }`}
+                          >
+                            {['S', 'M', 'T', 'W', 'T', 'F', 'S'][idx]}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Ends */}
+                <div className="space-y-3">
+                  <span className="text-[9px] font-mono uppercase font-black tracking-wider text-mono-400 block">Ends</span>
+                  
+                  {/* Ends: Never */}
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      id="ends-never"
+                      name="custom-ends"
+                      checked={customEnds === 'never'}
+                      onChange={() => setCustomEnds('never')}
+                      className="w-4 h-4 text-mono-900 border-mono-300 dark:border-mono-800 focus:ring-0 dark:bg-black"
+                    />
+                    <label htmlFor="ends-never" className="text-xs font-mono text-mono-750 dark:text-mono-300 cursor-pointer">
+                      Never
+                    </label>
+                  </div>
+
+                  {/* Ends: On Date */}
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      id="ends-on"
+                      name="custom-ends"
+                      checked={customEnds === 'on'}
+                      onChange={() => setCustomEnds('on')}
+                      className="w-4 h-4 text-mono-900 border-mono-300 dark:border-mono-800 focus:ring-0 dark:bg-black"
+                    />
+                    <label htmlFor="ends-on" className="text-xs font-mono text-mono-750 dark:text-mono-300 cursor-pointer pr-1">
+                      On
+                    </label>
+                    <input
+                      type="date"
+                      disabled={customEnds !== 'on'}
+                      value={customEndsOn}
+                      onChange={(e) => setCustomEndsOn(e.target.value)}
+                      className={`text-xs font-mono p-1.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white ${
+                        customEnds !== 'on' ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
+                    />
+                  </div>
+
+                  {/* Ends: After X occurrences */}
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      id="ends-after"
+                      name="custom-ends"
+                      checked={customEnds === 'after'}
+                      onChange={() => setCustomEnds('after')}
+                      className="w-4 h-4 text-mono-900 border-mono-300 dark:border-mono-800 focus:ring-0 dark:bg-black"
+                    />
+                    <label htmlFor="ends-after" className="text-xs font-mono text-mono-750 dark:text-mono-300 cursor-pointer">
+                      After
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      disabled={customEnds !== 'after'}
+                      value={customEndsAfter}
+                      onChange={(e) => setCustomEndsAfter(Math.max(1, parseInt(e.target.value, 10) || 1))}
+                      className={`w-14 text-center text-xs font-mono p-1.5 rounded-lg border border-mono-200 dark:border-mono-800 bg-transparent text-mono-900 dark:text-white focus:outline-none focus:border-mono-900 dark:focus:border-white ${
+                        customEnds !== 'after' ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
+                    />
+                    <span className="text-xs font-mono text-mono-750 dark:text-mono-300">occurrences</span>
+                  </div>
+                </div>
+
+                {/* Cancel and Done Buttons */}
+                <div className="pt-2 flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCustomModalOpen(false);
+                      if (customModalTarget === 'edit') {
+                        setEditRepeat(editCustomRrule || '');
+                      } else {
+                        setCreateRepeat(createCustomRrule || '');
+                      }
+                    }}
+                    className="flex-1 py-2 text-[10px] font-mono font-black uppercase tracking-wider rounded-lg border border-mono-200 hover:bg-mono-50 dark:border-mono-800 dark:hover:bg-mono-900 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      let rrule = `RRULE:FREQ=${customFrequency}`;
+                      if (customRepeatEvery > 1) {
+                        rrule += `;INTERVAL=${customRepeatEvery}`;
+                      }
+                      if (customFrequency === 'WEEKLY' && customRepeatOn.length > 0) {
+                        const order = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+                        const sortedDays = [...customRepeatOn].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+                        rrule += `;BYDAY=${sortedDays.join(',')}`;
+                      }
+                      if (customEnds === 'on') {
+                        const cleanDate = customEndsOn.replace(/-/g, '');
+                        rrule += `;UNTIL=${cleanDate}`;
+                      } else if (customEnds === 'after') {
+                        rrule += `;COUNT=${customEndsAfter}`;
+                      }
+
+                      if (customModalTarget === 'edit') {
+                        setEditCustomRrule(rrule);
+                        setEditRepeat(rrule);
+                      } else {
+                        setCreateCustomRrule(rrule);
+                        setCreateRepeat(rrule);
+                      }
+                      setCustomModalOpen(false);
+                    }}
+                    className="flex-1 py-2 text-[10px] font-mono font-black uppercase tracking-wider rounded-lg bg-mono-900 text-white dark:bg-white dark:text-mono-950 hover:bg-black dark:hover:bg-mono-100 transition-all shadow-md active:scale-95"
+                  >
+                    Done
+                  </button>
+                </div>
+              </div>
             </motion.div>
           </div>
         )}
