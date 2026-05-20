@@ -59,10 +59,29 @@ class GmailDraftTool(BaseWingmanTool):
             is_approved = human_decision.get("approved", False)
             
             if is_approved:
-                logger.info(f"[GmailTool] Approval received for DraftID={draft_id}. Executing send.")
+                # Support user manual edits prior to dispatch
+                final_recipient = human_decision.get("recipient", recipient)
+                final_subject = human_decision.get("subject", subject)
+                final_body = human_decision.get("body", body)
+                final_body_html = human_decision.get("body_html", body_html)
                 
-                # Note: If user edited values in the front end, we could rebuild draft here,
-                # but simple send is the standard required path.
+                if (final_recipient != recipient or 
+                    final_subject != subject or 
+                    final_body != body or 
+                    final_body_html != body_html):
+                    logger.info(f"[GmailTool] Custom modifications detected in HITL. Updating draft {draft_id}.")
+                    update_res = await gmail_service.update_draft(
+                        draft_id=draft_id,
+                        recipient=final_recipient,
+                        subject=final_subject,
+                        body_text=final_body,
+                        body_html=final_body_html
+                    )
+                    draft_id = update_res.get("draft_id", draft_id)
+                    recipient = final_recipient
+                    subject = final_subject
+
+                logger.info(f"[GmailTool] Approval received for DraftID={draft_id}. Executing send.")
                 send_result = await gmail_service.send_draft(draft_id)
                 
                 return {
@@ -72,16 +91,26 @@ class GmailDraftTool(BaseWingmanTool):
                     "subject": subject
                 }
             else:
-                # Rejection scenario: provides feedback trace back to the planner
+                # Rejection or Refinement scenario
                 reason = human_decision.get("reason", "User cancelled the action.")
-                logger.warning(f"[GmailTool] Email Draft {draft_id} REJECTED by user. Reason: {reason}")
+                refine = human_decision.get("refine", False)
                 
-                return {
-                    "status": "Rejected",
-                    "reason": reason,
-                    "draft_id": draft_id,
-                    "instruction": "The user rejected sending this draft. Revise the text or ask user for clarification based on the feedback reasoning."
-                }
+                if refine:
+                    logger.warning(f"[GmailTool] Email Draft {draft_id} REFINE requested by user. Feedback: {reason}")
+                    return {
+                        "status": "Refine Requested",
+                        "reason": reason,
+                        "draft_id": draft_id,
+                        "instruction": f"The user requested changes to the draft. Feedback: '{reason}'. You MUST revise the text and recipient details and call the gmail_draft tool again with the updated arguments to present the revised draft to the user."
+                    }
+                else:
+                    logger.warning(f"[GmailTool] Email Draft {draft_id} REJECTED by user. Reason: {reason}")
+                    return {
+                        "status": "Rejected",
+                        "reason": reason,
+                        "draft_id": draft_id,
+                        "instruction": "The user rejected sending this draft. Revise the text or ask user for clarification based on the feedback reasoning."
+                    }
                 
         except PermissionError as pe:
             logger.error(f"[GmailTool] Authentication error: {pe}")

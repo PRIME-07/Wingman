@@ -25,6 +25,59 @@ async def orchestrator_node(state: WingmanState) -> Dict[str, Any]:
         node_name=node_name
     )
     
+    # 0. Detect and handle successful communication HITL events (Gmail/Slack send success)
+    if state.get("messages"):
+        last_msg = state["messages"][-1]
+        if hasattr(last_msg, "type") and last_msg.type == "tool":
+            # Search backwards for the tool name corresponding to the ToolMessage's tool_call_id
+            tool_name = None
+            for msg in reversed(state["messages"][:-1]):
+                if hasattr(msg, "tool_calls") and msg.tool_calls:
+                    for tc in msg.tool_calls:
+                        if tc.get("id") == last_msg.tool_call_id:
+                            tool_name = tc.get("name")
+                            break
+                if tool_name:
+                    break
+            
+            if tool_name == "delegate_to_comm_agent":
+                content_lower = str(last_msg.content).lower()
+                # Check for failure/rejection/cancellation or refinement signals
+                is_rejection_failure_or_refine = any(
+                    word in content_lower 
+                    for word in ["reject", "cancel", "deny", "fail", "error", "refine"]
+                )
+                
+                # If there is no rejection, failure, or refinement request, it was a successful send/post!
+                if not is_rejection_failure_or_refine:
+                    from backend.app.core.utils import extract_text_content
+                    confirm_text = extract_text_content(last_msg.content)
+                    logger.info(f"[Orchestrator] Direct communication success detected for tool '{tool_name}'. Short-circuiting LLM with: '{confirm_text}'")
+                    
+                    # Emit token stream for the response so it is visible in real-time
+                    await emit_telemetry(
+                        state, 
+                        TelemetryEventType.TOKEN_STREAM, 
+                        node_name=node_name,
+                        payload={"token": confirm_text}
+                    )
+                    
+                    updates = {
+                        "messages": [AIMessage(content=confirm_text)],
+                        "active_node": node_name,
+                        "active_tool_calls": []
+                    }
+                    
+                    duration_ms = (time.perf_counter() - start_time) * 1000
+                    await emit_telemetry(
+                        state,
+                        TelemetryEventType.NODE_COMPLETED,
+                        node_name=node_name,
+                        duration_ms=duration_ms
+                    )
+                    return updates
+
+    
     # 1. Compile and Compress Working Memory (Token Budgeting)
     from backend.app.cognition.working_memory import working_memory_compiler
     

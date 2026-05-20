@@ -255,7 +255,7 @@ export function useWingmanConnection(threadId: string = 'default-session') {
   }, [addMessage, setStreaming, setHITL, currentReasoningEffort, currentModel, clearTelemetry]);
 
   // HITL decision router
-  const respondHITL = useCallback((approved: boolean, reason: string = '') => {
+  const respondHITL = useCallback((approved: boolean, reason: string = '', extra: Record<string, any> = {}) => {
     if (!chatWs.current || chatWs.current.readyState !== WebSocket.OPEN) {
       return;
     }
@@ -268,7 +268,8 @@ export function useWingmanConnection(threadId: string = 'default-session') {
       thread_id: activeThread.current,
       decision: {
         approved,
-        reason
+        reason,
+        ...extra
       }
     };
 

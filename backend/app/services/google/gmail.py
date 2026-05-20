@@ -86,6 +86,43 @@ class GmailService:
             logger.error(f"[GmailService] Error creating draft: {e}", exc_info=True)
             raise
 
+    async def update_draft(
+        self,
+        draft_id: str,
+        recipient: str,
+        subject: str,
+        body_text: str,
+        body_html: Optional[str] = None,
+        thread_id: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """Updates an existing email Draft object with a new message structure."""
+        try:
+            client = await self._get_client()
+            
+            mime_payload = self._build_mime_message(
+                recipient=recipient,
+                subject=subject,
+                body_text=body_text,
+                body_html=body_html,
+                thread_id=thread_id
+            )
+            
+            draft_body = {"id": draft_id, "message": mime_payload}
+            
+            logger.info(f"[GmailService] Updating draft ID={draft_id} for recipient='{recipient}'.")
+            
+            draft = client.users().drafts().update(userId="me", id=draft_id, body=draft_body).execute()
+            
+            logger.info(f"[GmailService] Securely updated Draft ID={draft.get('id')}.")
+            return {
+                "success": True,
+                "draft_id": draft.get("id"),
+                "status": "Draft Updated"
+            }
+        except Exception as e:
+            logger.error(f"[GmailService] Error updating draft: {e}", exc_info=True)
+            raise
+
     async def send_draft(self, draft_id: str) -> Dict[str, Any]:
         """Dispatches a previously staged Draft directly to the targeted recipients."""
         try:

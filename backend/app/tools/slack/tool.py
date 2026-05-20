@@ -95,13 +95,24 @@ class SlackDraftTool(BaseWingmanTool):
                 }
         else:
             reason = decision.get("reason", "User declined action.")
-            logger.warning(f"[SlackTool] Slack post rejected by operator: {reason}")
-            return {
-                "success": False,
-                "status": "Rejected",
-                "reason": reason,
-                "instruction": "User cancelled posting. Ask if they wish to refine content."
-            }
+            refine = decision.get("refine", False)
+            
+            if refine:
+                logger.warning(f"[SlackTool] Slack draft refine requested. Feedback: {reason}")
+                return {
+                    "success": False,
+                    "status": "Refine Requested",
+                    "reason": reason,
+                    "instruction": f"The user requested changes to the message/channel. Feedback: '{reason}'. You MUST revise the text and target channel details and call the slack_draft tool again with the updated arguments to present the revised draft to the user."
+                }
+            else:
+                logger.warning(f"[SlackTool] Slack post rejected by operator: {reason}")
+                return {
+                    "success": False,
+                    "status": "Rejected",
+                    "reason": reason,
+                    "instruction": "User cancelled posting. Ask if they wish to refine content."
+                }
 
 
 # Tool 2: Channel Discover (Safe)

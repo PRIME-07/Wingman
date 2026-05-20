@@ -51,8 +51,8 @@ export function LiveActivitiesSidebar() {
   const fetchLiveActivities = async () => {
     setIsRefreshing(true);
     try {
-      // 1. Fetch Timers (scoped to currentSessionId to align with user's current session context)
-      const timerRes = await fetch(`${API_BASE_URL}/tools/clock/timers?session_id=${currentSessionId || ''}`);
+      // 1. Fetch Timers globally
+      const timerRes = await fetch(`${API_BASE_URL}/tools/clock/timers`);
       if (timerRes.ok) {
         const data = await timerRes.json();
         setActiveTimers(data.active_timers || []);
@@ -290,6 +290,17 @@ function TimerItem({ timer, onCancel }: { timer: any, onCancel: (id: string) => 
   const duration = timer.duration_seconds || timer.total_seconds || 60;
   const progress = (timeLeft / duration) * 100;
 
+  const formatTime = (seconds: number) => {
+    if (seconds >= 3600) {
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      return `${h}h:${m.toString().padStart(2, '0')}m`;
+    }
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}m:${s.toString().padStart(2, '0')}s`;
+  };
+
   return (
     <motion.div 
       layout
@@ -312,7 +323,7 @@ function TimerItem({ timer, onCancel }: { timer: any, onCancel: (id: string) => 
        </div>
 
        <div className={`text-4xl font-mono font-black tracking-tighter ${isCompleted ? 'text-green-500' : 'text-mono-900 dark:text-white'}`}>
-         {Math.floor(timeLeft / 60)}:{Math.floor(timeLeft % 60).toString().padStart(2, '0')}
+         {formatTime(timeLeft)}
        </div>
        
        <div className="text-center">

@@ -25,8 +25,7 @@ function App() {
     wsConnected,
     fetchHistory,
     isRightSidebarOpen,
-    setRightSidebarOpen,
-    activeTimers
+    setRightSidebarOpen
   } = useChatStore();
 
   // Hydration guard — starts true, blocks WelcomeView until fetchHistory completes.
