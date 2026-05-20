@@ -55,6 +55,11 @@ class CapabilityDiscoveryEngine:
             google_cap.reason = f"Daily Quota Exceeded ({google_q.current_count}/{google_q.daily_limit})"
         capabilities["gmail_draft"] = google_cap
         capabilities["calendar_schedule"] = google_cap
+        capabilities["calendar_modify"] = google_cap
+        capabilities["calendar_delete"] = google_cap
+        capabilities["calendar_batch_schedule"] = google_cap
+        capabilities["calendar_batch_modify"] = google_cap
+        capabilities["calendar_batch_delete"] = google_cap
         capabilities["calendar_query"] = google_cap
         capabilities["docs_create"] = google_cap
         capabilities["docs_read"] = google_cap

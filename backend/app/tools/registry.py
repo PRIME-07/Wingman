@@ -8,7 +8,7 @@ from backend.app.tools.websearch.tool import WebSearchTool
 from backend.app.tools.memory.tool import MemoryRetrievalTool
 from backend.app.tools.gmail.tool import GmailDraftTool
 from backend.app.tools.slack.tool import SlackDraftTool, SlackChannelListTool
-from backend.app.tools.calendar.tool import CalendarScheduleTool, CalendarQueryTool, CalendarModifyTool, CalendarDeleteTool
+from backend.app.tools.calendar.tool import CalendarScheduleTool, CalendarQueryTool, CalendarModifyTool, CalendarDeleteTool, CalendarBatchScheduleTool, CalendarBatchModifyTool, CalendarBatchDeleteTool
 
 from backend.app.tools.google_docs.tool import DocsCreateTool, DocsReadTool, DocsEditTool, DocsSearchTool
 from backend.app.tools.google_sheets.tool import SheetsCreateTool, SheetsReadTool, SheetsAppendTool, SheetsUpdateTool, SheetsSearchTool
@@ -85,6 +85,9 @@ class ToolRegistry:
         self.register(CalendarQueryTool())
         self.register(CalendarModifyTool())
         self.register(CalendarDeleteTool())
+        self.register(CalendarBatchScheduleTool())
+        self.register(CalendarBatchModifyTool())
+        self.register(CalendarBatchDeleteTool())
         self.register(DocsCreateTool())
         self.register(DocsReadTool())
         self.register(DocsEditTool())

@@ -1,7 +1,26 @@
 import { useState, useEffect } from 'react';
 import { useChatStore } from '../stores/useChatStore';
-import { ShieldAlert, Check, X, Eye, MessageSquareQuote, Mail, Slack, Sparkles } from 'lucide-react';
+import { ShieldAlert, Check, X, Eye, MessageSquareQuote, Mail, Slack, Sparkles, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+const formatBatchEventTime = (ev: any) => {
+  if (ev.start_date) {
+    return `${ev.start_date} (All-day)`;
+  }
+  if (ev.start_iso) {
+    try {
+      const start = new Date(ev.start_iso);
+      const end = ev.end_iso ? new Date(ev.end_iso) : null;
+      const dateStr = start.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+      const timeStr = start.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) + 
+        (end ? ` - ${end.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}` : '');
+      return `${dateStr}, ${timeStr}`;
+    } catch {
+      return ev.start_iso;
+    }
+  }
+  return 'No time set';
+};
 
 interface HITLCardProps {
   onResume: (approved: boolean, feedback: string, extra?: Record<string, any>) => void;
@@ -18,6 +37,7 @@ export function HITLCard({ onResume }: HITLCardProps) {
   const [body, setBody] = useState('');
   const [channel, setChannel] = useState('');
   const [message, setMessage] = useState('');
+  const [batchEvents, setBatchEvents] = useState<any[]>([]);
 
   // Synchronize state values when activeHITL changes
   useEffect(() => {
@@ -28,6 +48,11 @@ export function HITLCard({ onResume }: HITLCardProps) {
       setChannel(activeHITL.data?.channel || '');
       setMessage(activeHITL.data?.message || '');
       setFeedback('');
+      if (activeHITL.tool === 'calendar_batch_schedule' || activeHITL.tool === 'calendar_batch_modify' || activeHITL.tool === 'calendar_batch_delete') {
+        setBatchEvents(activeHITL.data?.events || []);
+      } else {
+        setBatchEvents([]);
+      }
     }
   }, [activeHITL]);
 
@@ -35,6 +60,10 @@ export function HITLCard({ onResume }: HITLCardProps) {
 
   const isSlack = activeHITL.tool === 'slack_draft';
   const isGmail = activeHITL.tool === 'gmail_draft';
+  const isCalendarBatchSchedule = activeHITL.tool === 'calendar_batch_schedule';
+  const isCalendarBatchModify = activeHITL.tool === 'calendar_batch_modify';
+  const isCalendarBatchDelete = activeHITL.tool === 'calendar_batch_delete';
+  const isCalendarBatch = isCalendarBatchSchedule || isCalendarBatchModify || isCalendarBatchDelete;
 
   const handleAction = (approved: boolean) => {
     const extra: Record<string, any> = {};
@@ -45,6 +74,8 @@ export function HITLCard({ onResume }: HITLCardProps) {
       extra.recipient = recipient;
       extra.subject = subject;
       extra.body = body;
+    } else if (isCalendarBatch) {
+      extra.events = batchEvents;
     }
     onResume(approved, feedback, extra);
     setFeedback('');
@@ -60,6 +91,8 @@ export function HITLCard({ onResume }: HITLCardProps) {
       extra.recipient = recipient;
       extra.subject = subject;
       extra.body = body;
+    } else if (isCalendarBatch) {
+      extra.events = batchEvents;
     }
     onResume(false, feedback, extra);
     setFeedback('');
@@ -69,7 +102,7 @@ export function HITLCard({ onResume }: HITLCardProps) {
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
       <div className={`bg-white dark:bg-mono-950 border-2 border-mono-900 dark:border-mono-700 rounded-xl shadow-2xl w-full overflow-hidden animate-in zoom-in-95 duration-300 select-text ${
-        isSlack || isGmail ? 'max-w-xl' : 'max-w-md'
+        isSlack || isGmail || isCalendarBatch ? 'max-w-xl' : 'max-w-md'
       }`}>
         
         {/* Header Banner */}
@@ -187,6 +220,93 @@ export function HITLCard({ onResume }: HITLCardProps) {
                   rows={6}
                   className="w-full p-4 bg-white dark:bg-mono-950 text-xs text-mono-800 dark:text-mono-200 leading-relaxed font-sans resize-y focus:outline-none focus:ring-0 border-none border-t border-mono-200 dark:border-mono-900"
                 />
+              </div>
+            </motion.div>
+          )}
+
+          {/* Calendar Batch Preview */}
+          {isCalendarBatch && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-3"
+            >
+              <div className="text-[10px] font-mono text-mono-400 uppercase tracking-wider flex items-center gap-1.5 select-none">
+                {isCalendarBatchDelete ? (
+                  <>
+                    <Calendar size={12} className="text-red-500" /> Events to be Deleted/Cancelled ({batchEvents.length}):
+                  </>
+                ) : isCalendarBatchModify ? (
+                  <>
+                    <Calendar size={12} className="text-amber-500" /> Outbound Calendar Batch Modification ({batchEvents.length}):
+                  </>
+                ) : (
+                  <>
+                    <Calendar size={12} className="text-mono-550 dark:text-mono-300" /> Outbound Calendar Events Batch ({batchEvents.length}):
+                  </>
+                )}
+              </div>
+              <div className="max-h-72 overflow-y-auto space-y-2 pr-1 custom-scrollbar">
+                {batchEvents.map((ev, idx) => (
+                  <div 
+                    key={idx}
+                    className={`p-3 rounded-lg border flex flex-col gap-2 text-xs transition-colors duration-200 ${
+                      isCalendarBatchDelete 
+                        ? 'border-red-200 dark:border-red-900/40 bg-red-500/5' 
+                        : 'border-mono-200 dark:border-mono-800 bg-mono-50 dark:bg-black/25'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      {isCalendarBatchDelete ? (
+                        <div className="flex-1 font-bold text-red-700 dark:text-red-400">
+                          {ev.summary}
+                        </div>
+                      ) : (
+                        <input
+                          type="text"
+                          value={ev.summary}
+                          onChange={(e) => {
+                            const updated = [...batchEvents];
+                            updated[idx] = { ...ev, summary: e.target.value };
+                            setBatchEvents(updated);
+                          }}
+                          className="flex-1 bg-transparent border-b border-dashed border-mono-200 dark:border-mono-850 hover:border-mono-300 dark:hover:border-mono-700 focus:border-mono-900 dark:focus:border-white focus:outline-none py-0.5 font-bold text-mono-900 dark:text-white"
+                        />
+                      )}
+                      <div className="flex items-center gap-1.5 shrink-0 select-none">
+                        {ev.collision_detected && (
+                          <span className="text-[8px] font-mono font-bold uppercase tracking-wider bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded border border-amber-500/20">
+                            ⚠️ Collision
+                          </span>
+                        )}
+                        {isCalendarBatchDelete && (
+                          <span className="text-[8px] font-mono font-bold uppercase tracking-wider bg-red-500/10 text-red-600 dark:text-red-450 px-1.5 py-0.5 rounded border border-red-500/20">
+                            🗑️ Delete
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-1 text-[10px] text-mono-500 font-mono">
+                      <div>🕒 {formatBatchEventTime(ev)}</div>
+                      {ev.location && <div>📍 {ev.location}</div>}
+                      {ev.description && <div className="italic text-mono-400">📝 {ev.description}</div>}
+                    </div>
+
+                    {ev.collision_detected && ev.conflicting_events && ev.conflicting_events.length > 0 && (
+                      <div className="mt-1 p-2 rounded bg-amber-500/5 border border-amber-500/10 text-[9px] text-amber-700 dark:text-amber-450 font-mono leading-normal">
+                        <span className="font-bold">Conflicting events:</span>
+                        <ul className="list-disc pl-3.5 space-y-0.5 mt-1">
+                          {ev.conflicting_events.map((c: any, cIdx: number) => (
+                            <li key={cIdx}>
+                              {c.start?.dateTime ? new Date(c.start.dateTime).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : 'All-day'} - {c.summary || 'Busy'}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             </motion.div>
           )}

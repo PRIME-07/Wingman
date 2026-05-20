@@ -26,7 +26,7 @@ from backend.app.tools.gmail.tool import GmailDraftTool
 from backend.app.tools.slack.tool import SlackDraftTool, SlackChannelListTool
 from backend.app.tools.clock.tool import ClockTool
 from backend.app.tools.clock.timer_tool import TimerSetTool, TimerCancelTool, TimerListTool
-from backend.app.tools.calendar.tool import CalendarScheduleTool, CalendarQueryTool, CalendarModifyTool, CalendarDeleteTool
+from backend.app.tools.calendar.tool import CalendarScheduleTool, CalendarQueryTool, CalendarModifyTool, CalendarDeleteTool, CalendarBatchScheduleTool, CalendarBatchModifyTool, CalendarBatchDeleteTool
 from backend.app.tools.google_docs.tool import DocsCreateTool, DocsReadTool, DocsEditTool, DocsSearchTool
 from backend.app.tools.google_sheets.tool import SheetsCreateTool, SheetsReadTool, SheetsAppendTool, SheetsUpdateTool, SheetsSearchTool
 from backend.app.tools.google_maps.tool import MapsDirectionsTool, MapsNearbySearchTool
@@ -40,12 +40,24 @@ WEB_TOOLS = [WebSearchTool(), YoutubeSearchTool()]
 COMM_TOOLS = [GmailDraftTool(), SlackDraftTool(), SlackChannelListTool(), ContactsSearchTool(), ContactsCreateTool()]
 WORK_TOOLS = [
     ClockTool(), TimerSetTool(), TimerCancelTool(), TimerListTool(),
-    CalendarScheduleTool(), CalendarQueryTool(), CalendarModifyTool(), CalendarDeleteTool(), DocsCreateTool(),
+    CalendarScheduleTool(), CalendarBatchScheduleTool(), CalendarBatchModifyTool(), CalendarBatchDeleteTool(), CalendarQueryTool(), CalendarModifyTool(), CalendarDeleteTool(), DocsCreateTool(),
     DocsReadTool(), DocsEditTool(), DocsSearchTool(),
     SheetsCreateTool(), SheetsReadTool(), SheetsAppendTool(), SheetsUpdateTool(), SheetsSearchTool(),
     MapsDirectionsTool(), MapsNearbySearchTool(), WeatherQueryTool(), ContactsSearchTool(), ContactsCreateTool()
 ]
 RAG_TOOLS = [MemoryRetrievalTool(), DocumentRAGTool()]
+
+def _make_serializable(val: Any) -> Any:
+    """Recursively dumps Pydantic model objects to dictionary structures for JSON safety."""
+    if isinstance(val, dict):
+        return {k: _make_serializable(v) for k, v in val.items()}
+    elif isinstance(val, (list, tuple)):
+        return [_make_serializable(v) for v in val]
+    elif hasattr(val, "model_dump") and callable(val.model_dump):
+        return _make_serializable(val.model_dump())
+    elif hasattr(val, "dict") and callable(val.dict):
+        return _make_serializable(val.dict())
+    return val
 
 async def execute_subagent(state: WingmanState, agent_name: str, tools: list, prompt: str, config: RunnableConfig = None) -> Dict[str, Any]:
     """Helper to execute a specific sub-agent ReAct loop and return its output as a ToolMessage."""
@@ -98,8 +110,9 @@ async def execute_subagent(state: WingmanState, agent_name: str, tools: list, pr
         for w_tool in tools:
             def _make_coro(tool_inst):
                 async def _coro(**kwargs: Any) -> str:
+                    serializable_kwargs = _make_serializable(kwargs)
                     curr_run_id = state.get("run_id", "gen-run")
-                    args_str = json.dumps(kwargs, sort_keys=True)
+                    args_str = json.dumps(serializable_kwargs, sort_keys=True)
                     
                     # Deterministic sequence tracking for cache separation
                     curr_tool_index = tool_call_counters[tool_inst.name]
@@ -129,7 +142,7 @@ async def execute_subagent(state: WingmanState, agent_name: str, tools: list, pr
                                 TelemetryEventType.TOOL_STARTED,
                                 node_name=agent_name,
                                 tool_name=tool_inst.name,
-                                payload={"arguments": kwargs, "cached": True}
+                                payload={"arguments": serializable_kwargs, "cached": True}
                             )
                             await emit_telemetry(
                                 state,
@@ -145,7 +158,7 @@ async def execute_subagent(state: WingmanState, agent_name: str, tools: list, pr
                             return json.dumps(cached_entry["output"])
                     except Exception as e:
                         logger.warning(f"[SubAgentCache] Operation failed to query ledger: {e}")
-
+ 
                     # B. FRESH TOOL EXECUTION
                     ctx = ToolExecutionContext(
                         trace_id=state.get("trace_id", "gen-trace"),
@@ -164,13 +177,13 @@ async def execute_subagent(state: WingmanState, agent_name: str, tools: list, pr
                         TelemetryEventType.TOOL_STARTED,
                         node_name=agent_name,
                         tool_name=tool_inst.name,
-                        payload={"arguments": kwargs}
+                        payload={"arguments": serializable_kwargs}
                     )
                     
                     tool_start_time = time.perf_counter()
                     
                     # Execute actual integration client (may raise GraphInterrupt and suspend process)
-                    result = await tool_inst.run(kwargs, ctx)
+                    result = await tool_inst.run(serializable_kwargs, ctx)
                     
                     duration_ms = (time.perf_counter() - tool_start_time) * 1000.0
                     
